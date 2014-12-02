@@ -16,5 +16,12 @@ namespace AppDev2
         {
             InitializeComponent();
         }
+
+        private void GO_Click(object sender, EventArgs e)
+        {
+            //CHeck for empty/invalid- Curt
+            //If all is good, create an update data method -Reckie
+            // DataUpdater.EnterData(form1 box 1....)  --make static
+        }
     }
 }
