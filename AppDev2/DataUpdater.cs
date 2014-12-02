@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 namespace AppDev2
 {
+
     class DataUpdater  //http://www.codeproject.com/Articles/4416/Beginners-guide-to-accessing-SQL-Server-through-C
+
     {
         public static void connect()
         {
@@ -27,5 +29,12 @@ namespace AppDev2
         
         
         //blah blah do the good stuff here
+        public 
+
+
+        static void insertService(DateTime serviceDateTime, DateTime templateDateTime, string title, string theme, string SongLeader)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
