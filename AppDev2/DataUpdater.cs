@@ -12,11 +12,7 @@ namespace AppDev2
     {
         public static void connect()
         {
-            /*SqlConnection myConnection = new SqlConnection("user id=username;" +
-                                       "password=password;server=serverurl;" +
-                                       "Trusted_Connection=yes;" +
-                                       "database=database; " +
-                                       "connection timeout=30");
+            /*SqlConnection myConnection = new SqlConnection("Server = sparky.bju.edu;Databse=Cps301;Trusted_Connection=True;");
             try
             {
                 myConnection.Open();
