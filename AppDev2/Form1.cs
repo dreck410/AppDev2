@@ -22,6 +22,25 @@ namespace AppDev2
             //CHeck for empty/invalid- Curt
             //If all is good, create an update data method -Reckie
             // DataUpdater.EnterData(form1 box 1....)  --make static
+            
+            // This will be created from text box 1 and 2
+            DateTime serviceDateTime;
+
+            // this will be made from boxes 3 and 4
+            DateTime templateDateTime;
+
+            // Title
+            string title = "";
+
+            // theme
+            string theme = "";
+
+            //songLeader either ID or 
+            // a drop down that has all of the past song leaders from the database
+            string SongLeader = "";
+
+            DataUpdater.insertService(serviceDateTime, templateDateTime, title, theme, SongLeader);
+
         }
     }
 }
