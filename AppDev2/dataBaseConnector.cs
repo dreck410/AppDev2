@@ -57,8 +57,10 @@ namespace AppDev2
             SqlCommand cmd = new SqlCommand(sql, myConnection);
             SqlDataReader myReader = null;
             myReader = cmd.ExecuteReader();
+            
             while (myReader.Read())
             {
+                serviceID = Convert.ToInt32(myReader["Service_ID"]);
                 Console.WriteLine(myReader["Service_ID"].ToString());
             }
             return serviceID;
