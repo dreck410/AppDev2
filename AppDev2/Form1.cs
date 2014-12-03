@@ -30,12 +30,14 @@ namespace AppDev2
             string serviceDate = ServiceDateBox.Text;
             string serviceTime = ServiceTimeBox.Text;
 
+
             //From boxes 3 and 4
             string templateDate = TemplateDateBox.Text;
             string templateTime = TemplateTimeBox.Text;
 
             //This method validates all dates/time input
             invalidEntry = DataUpdater.validateDateTime(serviceDate, serviceTime, templateDate, templateTime);
+
 
             if (invalidEntry || serviceDate == "" || serviceTime == "" || templateDate == "" || templateTime == "") { invalidEntry = true; }
             else //Aka previous method validated entries
