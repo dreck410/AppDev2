@@ -12,7 +12,7 @@ namespace AppDev2
     {
         public static void connect()
         {
-            /*SqlConnection myConnection = new SqlConnection("Server = sparky.bju.edu;Databse=Cps301;Trusted_Connection=True;");
+            SqlConnection myConnection = new SqlConnection("Server = sparky.bju.edu;Databse=Cps301;Trusted_Connection=True;");
             try
             {
                 myConnection.Open();
@@ -20,7 +20,8 @@ namespace AppDev2
             catch (Exception e)
             {
                 Console.WriteLine(e.ToString());
-            }*/
+            }
+            Console.WriteLine("Connected to database");
         }
         
         

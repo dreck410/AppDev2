@@ -24,9 +24,11 @@ namespace AppDev2
             
             // This will be created from text box 1 and 2
             DateTime serviceDateTime;
+            serviceDateTime = DateTime.Now;
 
             // this will be made from boxes 3 and 4
             DateTime templateDateTime;
+            templateDateTime = DateTime.Now;
 
             // Title
             string title = "";
