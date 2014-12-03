@@ -59,7 +59,7 @@ namespace AppDev2
             myReader = cmd.ExecuteReader();
             while (myReader.Read())
             {
-                Console.WriteLine(myReader.ToString());
+                Console.WriteLine(myReader["Service_ID"].ToString());
             }
             return serviceID;
         }

@@ -30,7 +30,9 @@ namespace AppDev2
             serviceDateTime = DateTime.Now;
             string serviceDate = ServiceDateBox.Text;
             string serviceTime = ServiceTimeBox.Text;
-            serviceDateTime = DateTime.ParseExact(serviceDate + " " + serviceTime, "dd/MM/yy h:mm:ss tt", CultureInfo.InvariantCulture); ;
+            
+            //serviceDateTime = DateTime.ParseExact(serviceDate + " " + serviceTime, "dd/MM/yy h:mm:ss tt", CultureInfo.InvariantCulture);
+            serviceDateTime = DateTime.Now;
             // this will be made from boxes 3 and 4
             DateTime templateDateTime;
             templateDateTime = DateTime.Now;
@@ -47,6 +49,11 @@ namespace AppDev2
 
             //If all is good, create an update data method -Reckie
             DataUpdater.insertService(serviceDateTime, templateDateTime, title, theme, SongLeader);
+
+        }
+
+        private void ServiceDateBox_TextChanged(object sender, EventArgs e)
+        {
 
         }
     }
