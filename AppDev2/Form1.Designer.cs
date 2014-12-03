@@ -60,7 +60,7 @@
             this.ServiceDateBox.Name = "ServiceDateBox";
             this.ServiceDateBox.Size = new System.Drawing.Size(100, 20);
             this.ServiceDateBox.TabIndex = 1;
-            this.ServiceDateBox.Text = "10/10/10";
+            this.ServiceDateBox.Text = "10/10/2000";
             this.ServiceDateBox.TextChanged += new System.EventHandler(this.ServiceDateBox_TextChanged);
             // 
             // label2
@@ -95,7 +95,7 @@
             this.TemplateDateBox.Name = "TemplateDateBox";
             this.TemplateDateBox.Size = new System.Drawing.Size(100, 20);
             this.TemplateDateBox.TabIndex = 5;
-            this.TemplateDateBox.Text = "10/10/10";
+            this.TemplateDateBox.Text = "10/10/2000";
             // 
             // label4
             // 
@@ -192,7 +192,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.ServiceDateBox);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.Text = "AppDev2";
             this.ResumeLayout(false);

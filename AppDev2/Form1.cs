@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Globalization;
+using System.Text.RegularExpressions;
 namespace AppDev2
 {
     public partial class Form1 : Form
@@ -16,31 +17,37 @@ namespace AppDev2
         {
             InitializeComponent();
         }
-
+        
         private void GO_Click(object sender, EventArgs e)
         {
             //CHeck for empty/invalid- Curt
-            
-            /*DateTime User Entry Format is:
-             * string one = "02/13/09";
-               string two = "2:35:10 PM"
-             * */
+            bool invalidEntry = false;
+           
+            DateTime serviceDateTime= DateTime.Now;
+            DateTime templateDateTime= DateTime.Now;
+
             // This will be created from text box 1 and 2
-            DateTime serviceDateTime;
-            serviceDateTime = DateTime.Now;
             string serviceDate = ServiceDateBox.Text;
             string serviceTime = ServiceTimeBox.Text;
+
+            //From boxes 3 and 4
+            string templateDate = TemplateDateBox.Text;
+            string templateTime = TemplateTimeBox.Text;
+
+            //This method validates all dates/time input
+            invalidEntry = DataUpdater.validateDateTime(serviceDate, serviceTime, templateDate, templateTime);
+
+            if (invalidEntry || serviceDate == "" || serviceTime == "" || templateDate == "" || templateTime == "") { invalidEntry = true; }
+            else //Aka previous method validated entries
+            {
+                serviceDateTime = DateTime.ParseExact(serviceDate + " " + serviceTime, "MM/dd/yyyy h:mm:ss tt", CultureInfo.InvariantCulture);
+                templateDateTime = DateTime.ParseExact(templateDate + " " + templateTime, "MM/dd/yyyy h:mm:ss tt", CultureInfo.InvariantCulture);
+                //MessageBox.Show(serviceDateTime.ToString());//It looks correct-leaving this uncommented, what do you think?
             
-            serviceDateTime = DateTime.ParseExact(serviceDate + " " + serviceTime, "MM/dd/yy h:mm:ss tt", CultureInfo.InvariantCulture);
-            MessageBox.Show(serviceDateTime.ToString());//It looks correct-leaving this uncommented, what do you think?
-            //^This works-maybe? 
-
-            //serviceDateTime = DateTime.Now;
-            // this will be made from boxes 3 and 4
-            DateTime templateDateTime;
-            templateDateTime = DateTime.Now;
-
-            // Title
+            }
+          
+           
+            // Title-can be null
             string title = TitleBox.Text;
 
             // theme
@@ -51,7 +58,14 @@ namespace AppDev2
             string SongLeader = SongleaderBox.Text;
 
             //If all is good, create an update data method -Reckie
-            DataUpdater.insertService(serviceDateTime, templateDateTime, title, theme, SongLeader);
+            if (invalidEntry)
+            {
+                MessageBox.Show("Invalid Entries Detected- Please Re-Enter");
+            }
+            else
+            {
+                 DataUpdater.insertService(serviceDateTime, templateDateTime, title, theme, SongLeader);
+            }
 
         }
 
