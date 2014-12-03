@@ -20,7 +20,6 @@ namespace AppDev2
         private void GO_Click(object sender, EventArgs e)
         {
             //CHeck for empty/invalid- Curt
-            //If all is good, create an update data method -Reckie
             // DataUpdater.EnterData(form1 box 1....)  --make static
             
             // This will be created from text box 1 and 2
@@ -39,6 +38,7 @@ namespace AppDev2
             // a drop down that has all of the past song leaders from the database
             string SongLeader = "";
 
+            //If all is good, create an update data method -Reckie
             DataUpdater.insertService(serviceDateTime, templateDateTime, title, theme, SongLeader);
 
         }
