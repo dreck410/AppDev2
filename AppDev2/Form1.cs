@@ -22,7 +22,7 @@ namespace AppDev2
             //CHeck for empty/invalid- Curt
             
             /*DateTime User Entry Format is:
-             * string one = "13/02/09";
+             * string one = "02/13/09";
                string two = "2:35:10 PM"
              * */
             // This will be created from text box 1 and 2
@@ -31,8 +31,11 @@ namespace AppDev2
             string serviceDate = ServiceDateBox.Text;
             string serviceTime = ServiceTimeBox.Text;
             
-            //serviceDateTime = DateTime.ParseExact(serviceDate + " " + serviceTime, "dd/MM/yy h:mm:ss tt", CultureInfo.InvariantCulture);
-            serviceDateTime = DateTime.Now;
+            serviceDateTime = DateTime.ParseExact(serviceDate + " " + serviceTime, "MM/dd/yy h:mm:ss tt", CultureInfo.InvariantCulture);
+            MessageBox.Show(serviceDateTime.ToString());//It looks correct-leaving this uncommented, what do you think?
+            //^This works-maybe? 
+
+            //serviceDateTime = DateTime.Now;
             // this will be made from boxes 3 and 4
             DateTime templateDateTime;
             templateDateTime = DateTime.Now;
