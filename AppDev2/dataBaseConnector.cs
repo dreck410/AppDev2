@@ -34,16 +34,34 @@ namespace AppDev2
 
         public void connect()
         {
-            myConnection = new SqlConnection("Server = sparky.bju.edu;Database=Cps301;Trusted_Connection=True;");
+            //myConnection = new SqlConnection("Server=sparky.bju.edu; Database=cps301_dreck410; Trusted_Connection=True;");
+            myConnection = new SqlConnection("Server=sparky.bju.edu;Database=cps301_dreck410;User Id=dreck410;Password=dreck410;");
             try
             {
                 myConnection.Open();
+                Console.WriteLine("Connected to database");
+
             }
             catch (Exception e)
             {
+                Console.WriteLine("Did Not Connect");
                 Console.WriteLine(e.ToString());
             }
-            Console.WriteLine("Connected to database");
+        }
+
+        public int getTemplateServiceID(string templateService){
+            int serviceID = -1;
+
+            this.connect();
+            string sql = "SELECT Service.Service_ID FROM Service WHERE Service.Svc_DateTime = " + templateService;
+            SqlCommand cmd = new SqlCommand(sql, myConnection);
+            SqlDataReader myReader = null;
+            myReader = cmd.ExecuteReader();
+            while (myReader.Read())
+            {
+                Console.WriteLine(myReader.ToString());
+            }
+            return serviceID;
         }
 
         // inserts data into the table

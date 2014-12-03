@@ -4,34 +4,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
+using System.Threading;
+
 namespace AppDev2
 {
 
-    class DataUpdater  //http://www.codeproject.com/Articles/4416/Beginners-guide-to-accessing-SQL-Server-through-C
-
+    public class DataUpdater  //http://www.codeproject.com/Articles/4416/Beginners-guide-to-accessing-SQL-Server-through-C
     {
-        public static void connect()
-        {
-            SqlConnection myConnection = new SqlConnection("Server = sparky.bju.edu;Databse=Cps301;Trusted_Connection=True;");
-            try
-            {
-                myConnection.Open();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.ToString());
-            }
-            Console.WriteLine("Connected to database");
-        }
-        
-        
+
         //blah blah do the good stuff here
-        public 
+        
 
-
-        static void insertService(DateTime serviceDateTime, DateTime templateDateTime, string title, string theme, string SongLeader)
+        public void insertService(DateTime serviceDateTime, DateTime templateDateTime, string title, string theme, string SongLeader)
         {
-            throw new NotImplementedException();
+            int tempServID = dataBaseConnector.Instance.getTemplateServiceID("\'2010-10-03 10:30:00:000\'");
+           // throw new NotImplementedException();
         }
+       /* public void insertService()
+        {
+            ;
+        }
+        * */
     }
 }

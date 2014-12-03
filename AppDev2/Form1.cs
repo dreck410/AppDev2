@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace AppDev2
 {
@@ -21,7 +22,6 @@ namespace AppDev2
         {
             //CHeck for empty/invalid- Curt
             // DataUpdater.EnterData(form1 box 1....)  --make static
-            
             // This will be created from text box 1 and 2
             DateTime serviceDateTime;
             serviceDateTime = DateTime.Now;
@@ -41,7 +41,10 @@ namespace AppDev2
             string SongLeader = "";
 
             //If all is good, create an update data method -Reckie
-            DataUpdater.insertService(serviceDateTime, templateDateTime, title, theme, SongLeader);
+            DataUpdater dataUpdater = new DataUpdater();
+            
+
+            dataUpdater.insertService(serviceDateTime, templateDateTime, title, theme, SongLeader);//serviceDateTime, templateDateTime, title, theme, SongLeader);
 
         }
     }
