@@ -53,7 +53,7 @@ namespace AppDev2
             int serviceID = -1;
 
             this.connect();
-            string sql = "SELECT Service.Service_ID FROM Service WHERE Service.Svc_DateTime = " + templateService;
+            string sql = "SELECT Service.Service_ID FROM Service WHERE Service.Svc_DateTime = \'" + templateService + "\'";
             SqlCommand cmd = new SqlCommand(sql, myConnection);
             SqlDataReader myReader = null;
             myReader = cmd.ExecuteReader();

@@ -36,6 +36,7 @@ namespace AppDev2
             // this will be made from boxes 3 and 4
             DateTime templateDateTime;
             templateDateTime = DateTime.Now;
+            //templateDateTime = DateTime.ParseExact("2010-10-03 10:30:00", "yyyy-mm-dd hh:mm:ss", CultureInfo.InvariantCulture);
 
             // Title
             string title = TitleBox.Text;
