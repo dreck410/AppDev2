@@ -47,17 +47,12 @@ namespace AppDev2
                 //MessageBox.Show(serviceDateTime.ToString());//It looks correct-leaving this uncommented, what do you think?
             
             }
-          
-           
-            // Title-can be null
             string title = TitleBox.Text;
-
-            // theme
             string theme = ThemeBox.Text;
 
             //songLeader either ID or 
             // a drop down that has all of the past song leaders from the database
-            string SongLeader = SongleaderBox.Text;
+            string SongLeader = SongLeaderBox.Text;
 
             //If all is good, create an update data method -Reckie
             if (invalidEntry)
@@ -72,6 +67,16 @@ namespace AppDev2
         }
 
         private void ServiceDateBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ServiceTimeBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

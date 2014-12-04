@@ -49,6 +49,22 @@ namespace AppDev2
             }
         }
 
+        public string getPastSongLeaders()
+        {
+            string output = "";
+            string sql = "select distinct (Person.First_Name + ' ' + Person.Last_Name) as Name from service, Person where Service.Songleader_ID = Person.Person_ID";
+            this.connect();
+            SqlCommand cmd = new SqlCommand(sql, myConnection);
+            SqlDataReader myReader = null;
+            myReader = cmd.ExecuteReader();
+            while (myReader.Read())
+            {
+                output += myReader["Name"] + "\n";
+            }
+            Console.WriteLine(output);
+            return output;
+        }
+
         public int getTemplateServiceID(string templateService){
             int serviceID = -1;
 
@@ -58,18 +74,17 @@ namespace AppDev2
             SqlDataReader myReader = null;
             myReader = cmd.ExecuteReader();
             
-            while (myReader.Read())
-            {
-                serviceID = Convert.ToInt32(myReader["Service_ID"]);
-                Console.WriteLine(myReader["Service_ID"].ToString());
-            }
+            myReader.Read();
+            serviceID = Convert.ToInt32(myReader["Service_ID"]);
+            Console.WriteLine(serviceID);
             return serviceID;
         }
 
+
         // inserts data into the table
-        public void insert(string sql)
+        public void insert(int templateID, string theme, string title, string songLeader)
         {
-            sql = "INSERT INTO student (name)";
+            string sql = "INSERT INTO student (name)";
             SqlCommand cmd = new SqlCommand(sql, myConnection);
             cmd.ExecuteNonQuery();
         }

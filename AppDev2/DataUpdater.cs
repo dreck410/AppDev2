@@ -34,7 +34,10 @@ namespace AppDev2
 
         public static void insertService(DateTime serviceDateTime, DateTime templateDateTime, string title, string theme, string SongLeader)
         {
-            int tempServID = dataBaseConnector.Instance.getTemplateServiceID("2010-10-03 10:30:00");
+            Console.WriteLine(templateDateTime.ToString());
+            Console.WriteLine(templateDateTime.ToShortDateString());
+            Console.WriteLine(templateDateTime.ToShortTimeString());
+            int tempServID = dataBaseConnector.Instance.getTemplateServiceID(templateDateTime.ToString());
             /*
              * Insert records into the ServiceEvent table for the new service based on the events in the template service, 
              * except that the specific songs, personnel, and ensembles should be left blank. For example, if the user enters
