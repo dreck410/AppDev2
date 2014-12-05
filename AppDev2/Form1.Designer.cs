@@ -78,7 +78,7 @@
             this.ServiceTimeBox.Name = "ServiceTimeBox";
             this.ServiceTimeBox.Size = new System.Drawing.Size(100, 20);
             this.ServiceTimeBox.TabIndex = 3;
-            this.ServiceTimeBox.Text = "1:10:10 PM";
+            this.ServiceTimeBox.Text = "1:10:10 ";
             // 
             // label3
             // 
@@ -160,7 +160,7 @@
             this.TemplateTimeBox.Name = "TemplateTimeBox";
             this.TemplateTimeBox.Size = new System.Drawing.Size(100, 20);
             this.TemplateTimeBox.TabIndex = 13;
-            this.TemplateTimeBox.Text = "1:10:10 PM";
+            this.TemplateTimeBox.Text = "1:10:10 ";
             // 
             // GO
             // 

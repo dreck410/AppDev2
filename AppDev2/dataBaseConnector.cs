@@ -73,5 +73,10 @@ namespace AppDev2
             SqlCommand cmd = new SqlCommand(sql, myConnection);
             cmd.ExecuteNonQuery();
         }
+        /*THIS IS FOR +3 POINTS, LET USER CHOOSE SONGLEADERNAMES FROM DROP DOWN. HERE IS WORKING QUERY, JSUT NEED TO MAKE METHOD
+         * Select First_Name+' '+Last_Name as "name"
+         * FROM dbo.Person,dbo.Service
+         * WHERE dbo.Person.Person_ID = dbo.Service.Songleader_ID
+         * */
     }
 }

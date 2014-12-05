@@ -42,8 +42,8 @@ namespace AppDev2
             if (invalidEntry || serviceDate == "" || serviceTime == "" || templateDate == "" || templateTime == "") { invalidEntry = true; }
             else //Aka previous method validated entries
             {
-                serviceDateTime = DateTime.ParseExact(serviceDate + " " + serviceTime, "MM/dd/yyyy h:mm:ss tt", CultureInfo.InvariantCulture);
-                templateDateTime = DateTime.ParseExact(templateDate + " " + templateTime, "MM/dd/yyyy h:mm:ss tt", CultureInfo.InvariantCulture);
+                serviceDateTime = DateTime.ParseExact(serviceDate + " " + serviceTime, "MM/dd/yyyy hh:mm:ss ", CultureInfo.InvariantCulture);
+                templateDateTime = DateTime.ParseExact(templateDate + " " + templateTime, "MM/dd/yyyy hh:mm:ss ", CultureInfo.InvariantCulture);
                 //MessageBox.Show(serviceDateTime.ToString());//It looks correct-leaving this uncommented, what do you think?
             
             }
