@@ -64,19 +64,29 @@ namespace AppDev2
             return leaders;
         }
          
-        public void createSongView() //Gets the view data, retursn the DataTable to be loaded into the view
+        public void createSongView() //SUCESSFULLY CREATES VIEW JUST NEED TO ADJUST LastUsedDate To be linked to most recently used
         {
             /*Create a SQL Server view named SongUsageView that displays all of the colums in the Song table,plus one named LastUsedDate. 
              * The LastUsedDate column should contain the date of the most recent service that used that song. 
              * (Exclude choral songs, but be sure to include songs which have never been used).
              * Using this view, display 20 of the least recently used songs, ordered by LastUsedDate, and then song title. 
              * Allow the user to select songs from this list, and assign them to the congregational song events. (10 points)*/
-
-            string sql = "CREATE VIEW SongUsageView AS SELECT * FROM Song"; //Still need to add in LastUsedDate into this query
-            this.connect();
-            SqlCommand cmd = new SqlCommand(sql, myConnection);
-            SqlDataReader myReader = null;
-            myReader = cmd.ExecuteReader();
+            try
+            {
+                string sql = "CREATE VIEW SongUsageView AS SELECT dbo.Song.*,dbo.Service.Svc_DateTime as 'LastUsedDate'FROM Song,Service"; //Still need to add in LastUsedDate into this query
+                this.connect();
+                SqlCommand cmd = new SqlCommand(sql, myConnection);
+                SqlDataReader myReader = null;
+                myReader = cmd.ExecuteReader();
+            }
+            catch
+            {
+                string sql = "ALTER VIEW SongUsageView AS SELECT dbo.Song.*,dbo.Service.Svc_DateTime as 'LastUsedDate'FROM Song,Service"; //Still need to add in LastUsedDate into this query
+                this.connect();
+                SqlCommand cmd = new SqlCommand(sql, myConnection);
+                SqlDataReader myReader = null;
+                myReader = cmd.ExecuteReader();
+            }
 
             
         }
