@@ -89,22 +89,23 @@ namespace AppDev2
             List<string> Notes = new List<string>();
 
             this.connect();
-            string insertService = "insert into Service values ( \'"+ serviceTime +"\', \'" + theme + "\', \'" + title + "\', null, \'N\', \'N\', \'N\', null, null, null";
-            int newServiceID = getServiceID(serviceTime);
+            string insertService = "insert into Service values ( \'"+ serviceTime +"\', \'" + theme + "\', \'" + title + "\', null, \'N\', \'N\', \'N\', null, " + personID.ToString() + ", null)";
+
             SqlCommand cmd = new SqlCommand(insertService, myConnection);
             Console.WriteLine("Rows affected "+cmd.ExecuteNonQuery().ToString());
-
+            int newServiceID = getServiceID(serviceTime);
 
 
             string serviceEvents = "select Seq_Num, EventType_ID, Notes from ServiceEvent where ServiceEvent.Service_ID = " + templateID.ToString();
 
+            this.connect();
             cmd = new SqlCommand(serviceEvents, myConnection);
             SqlDataReader myReader = null;
             myReader = cmd.ExecuteReader();
             int size = 0;
             while (myReader.Read())
             {
-                Seq_Num.Add(Convert.ToInt32(myReader["Event_ID"]));
+                Seq_Num.Add(Convert.ToInt32(myReader["Seq_Num"]));
                 EventType_ID.Add(Convert.ToInt32(myReader["EventType_ID"]));
                 Notes.Add(myReader["Notes"].ToString());
                 ++size;
@@ -113,6 +114,7 @@ namespace AppDev2
             {
                 string insertServiceEvent = "insert into ServiceEvent values ( " + newServiceID.ToString() + ", " + Seq_Num[i].ToString() + ", " + EventType_ID[i] + " , '" + Notes[i] + "', 'N', null, null, null)";
 
+                this.connect();
                 cmd = new SqlCommand(insertServiceEvent, myConnection);
                 cmd.ExecuteNonQuery();
             }

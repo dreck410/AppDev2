@@ -68,9 +68,10 @@ namespace AppDev2
             {
                  DataUpdater.insertService(serviceDateTime, templateDateTime, title, theme, SongLeader);
                 //update the song leader combo box to have that new guys name in it. 
+                 this.SongLeaderBox.Items.Clear();
                 foreach (string item in dataBaseConnector.Instance.getPastSongLeaders())
                  {
-                     this.SongLeaderBox.Items.Add(item);
+                    this.SongLeaderBox.Items.Add(item);
                  }
             }
 
