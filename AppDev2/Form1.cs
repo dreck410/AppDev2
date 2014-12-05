@@ -26,7 +26,21 @@ namespace AppDev2
                 this.TemplateList.Items.Add(date);
             }
             dataBaseConnector.Instance.createSongView();
-            
+
+            //Daniel TODO
+            /*
+             * To help the songleader choose songs for each service, create a view named SongUsageView 
+             * that displays all of the colums in the Song table, plus one named LastUsedDate, and one 
+             * named Theme. The LastUsedDate column should contain the date of the most recent service 
+             * that used that song, and the Theme should be the theme of the service that used it. Include
+             * all songs in the SongView, even those which have not been used in a service. However, the 
+             * view should not include choral numbers.
+             * 
+             * Create a stored procedure named LeastUsedSongs that displays the top 10 songs from the 
+             * SongUsageView, when ordered in ascending order on LastUsedDate and then Title. Use the SELECT 
+             * TOP feature of SQL Server to limit the number of rows to the top 10. 10 points. 
+             */
+
         }
         
         private void GO_Click(object sender, EventArgs e)

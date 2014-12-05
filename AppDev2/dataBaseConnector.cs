@@ -144,7 +144,7 @@ namespace AppDev2
             SqlCommand cmd = new SqlCommand(insertService, myConnection);
             Console.WriteLine("Rows affected " + cmd.ExecuteNonQuery().ToString());
 
-
+            // needs to get the ID of the new service after the new service has been created!
             int newServiceID = getServiceID(serviceTime);
             if (newServiceID <= 0) { return -2; }
 
@@ -176,7 +176,6 @@ namespace AppDev2
 
         private int getPersonID(string songLeader)
         {
-
             int personID = -1;
             string sql = "";
             try
@@ -195,7 +194,6 @@ namespace AppDev2
             SqlCommand cmd = new SqlCommand(sql, myConnection);
             SqlDataReader myReader = null;
             myReader = cmd.ExecuteReader();
-
             myReader.Read();
             try
             {
@@ -209,6 +207,7 @@ namespace AppDev2
             Console.WriteLine(personID);
             return personID;
         }
+        
         /*THIS IS FOR +3 POINTS, LET USER CHOOSE SONGLEADERNAMES FROM DROP DOWN. HERE IS WORKING QUERY, JSUT NEED TO MAKE METHOD
          * Select First_Name+' '+Last_Name as "name"
          * FROM dbo.Person,dbo.Service
