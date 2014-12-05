@@ -179,24 +179,35 @@ namespace AppDev2
         {
 
             int personID = -1;
+            string sql = "";
             try
             {
                 personID = Convert.ToInt32(songLeader);
+                sql = "select Person.Person_ID from Person where Person.Person_ID = " + personID.ToString();
             }
             catch (Exception e)
             {
                 string[] fullName = songLeader.Split(' ');
                 this.connect();
-                string sql = "select Person.Person_ID from Person where\'" + fullName[0] + "\' = Person.First_Name and \'" + fullName[1] + "\' = Person.Last_Name";
-                SqlCommand cmd = new SqlCommand(sql, myConnection);
-                SqlDataReader myReader = null;
-                myReader = cmd.ExecuteReader();
+                sql = "select Person.Person_ID from Person where\'" + fullName[0] + "\' = Person.First_Name and \'" + fullName[1] + "\' = Person.Last_Name";
 
-                myReader.Read();
-                personID = Convert.ToInt32(myReader["Person_ID"]);
-                Console.WriteLine(personID);
             }
+            this.connect();
+            SqlCommand cmd = new SqlCommand(sql, myConnection);
+            SqlDataReader myReader = null;
+            myReader = cmd.ExecuteReader();
 
+            myReader.Read();
+            try
+            {
+                personID = Convert.ToInt32(myReader["Person_ID"]);
+            }
+            catch (Exception)
+            {
+                return -1;
+                throw;
+            }
+            Console.WriteLine(personID);
             return personID;
         }
         /*THIS IS FOR +3 POINTS, LET USER CHOOSE SONGLEADERNAMES FROM DROP DOWN. HERE IS WORKING QUERY, JSUT NEED TO MAKE METHOD
