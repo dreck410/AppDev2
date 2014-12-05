@@ -20,6 +20,7 @@ namespace AppDev2
             {
                 this.SongLeaderBox.Items.Add(item);
             }
+            dataBaseConnector.Instance.createSongView();
             
         }
         
