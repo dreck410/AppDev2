@@ -42,6 +42,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.TemplateTimeBox = new System.Windows.Forms.TextBox();
             this.GO = new System.Windows.Forms.Button();
+            this.SongLeaderBox1 = new System.Windows.Forms.ComboBox();
             this.SongLeaderBox = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
@@ -180,14 +181,20 @@
             this.GO.UseVisualStyleBackColor = true;
             this.GO.Click += new System.EventHandler(this.GO_Click);
             // 
+            // SongLeaderBox1
+            // 
+            this.SongLeaderBox1.Location = new System.Drawing.Point(0, 0);
+            this.SongLeaderBox1.Name = "SongLeaderBox1";
+            this.SongLeaderBox1.Size = new System.Drawing.Size(121, 28);
+            this.SongLeaderBox1.TabIndex = 17;
+            // 
             // SongLeaderBox
             // 
             this.SongLeaderBox.FormattingEnabled = true;
-            this.SongLeaderBox.Location = new System.Drawing.Point(194, 416);
+            this.SongLeaderBox.Location = new System.Drawing.Point(194, 417);
             this.SongLeaderBox.Name = "SongLeaderBox";
-            this.SongLeaderBox.Size = new System.Drawing.Size(148, 28);
-            this.SongLeaderBox.TabIndex = 15;
-            this.SongLeaderBox.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.SongLeaderBox.Size = new System.Drawing.Size(202, 28);
+            this.SongLeaderBox.TabIndex = 18;
             // 
             // Form1
             // 
@@ -195,6 +202,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1010, 543);
             this.Controls.Add(this.SongLeaderBox);
+            this.Controls.Add(this.SongLeaderBox1);
             this.Controls.Add(this.GO);
             this.Controls.Add(this.TemplateTimeBox);
             this.Controls.Add(this.label7);
@@ -211,6 +219,7 @@
             this.Controls.Add(this.label1);
             this.Name = "Form1";
             this.Text = "AppDev2";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -232,6 +241,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox TemplateTimeBox;
         private System.Windows.Forms.Button GO;
+        private System.Windows.Forms.ComboBox SongLeaderBox1;
         private System.Windows.Forms.ComboBox SongLeaderBox;
     }
 }

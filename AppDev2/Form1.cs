@@ -16,6 +16,10 @@ namespace AppDev2
         public Form1()
         {
             InitializeComponent();
+            foreach (string item in dataBaseConnector.Instance.getPastSongLeaders())
+            {
+                this.SongLeaderBox.Items.Add(item);
+            }
         }
         
         private void GO_Click(object sender, EventArgs e)
@@ -53,6 +57,7 @@ namespace AppDev2
             //songLeader either ID or 
             // a drop down that has all of the past song leaders from the database
             string SongLeader = SongLeaderBox.Text;
+            Console.WriteLine(SongLeader);
 
             //If all is good, create an update data method -Reckie
             if (invalidEntry)
@@ -62,6 +67,11 @@ namespace AppDev2
             else
             {
                  DataUpdater.insertService(serviceDateTime, templateDateTime, title, theme, SongLeader);
+                //update the song leader combo box to have that new guys name in it. 
+                foreach (string item in dataBaseConnector.Instance.getPastSongLeaders())
+                 {
+                     this.SongLeaderBox.Items.Add(item);
+                 }
             }
 
         }
@@ -76,7 +86,12 @@ namespace AppDev2
 
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void comboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
         {
 
         }
