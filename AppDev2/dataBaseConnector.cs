@@ -215,5 +215,22 @@ namespace AppDev2
          * FROM dbo.Person,dbo.Service
          * WHERE dbo.Person.Person_ID = dbo.Service.Songleader_ID
          * */
+
+        internal IEnumerable<string> getValidDates()
+        {
+            List<string> Dates = new List<string>();
+            string sql = "select distinct Svc_DateTime from service";
+            this.connect();
+            SqlCommand cmd = new SqlCommand(sql, myConnection);
+            SqlDataReader myReader = null;
+            myReader = cmd.ExecuteReader();
+            while (myReader.Read())
+            {
+                Dates.Add(myReader["Svc_DateTime"].ToString());
+                DateTime d = Convert.ToDateTime(myReader["Svc_DateTime"].ToString());
+                Console.WriteLine(d);
+            }
+            return Dates;
+        }
     }
 }

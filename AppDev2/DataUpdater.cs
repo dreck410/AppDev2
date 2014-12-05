@@ -19,9 +19,11 @@ namespace AppDev2
              bool invalid=true;
              try
              {
-                 DateTime serviceDateTime = DateTime.ParseExact(date + " " + time, "MM/dd/yyyy hh:mm:ss ", CultureInfo.InvariantCulture);
-                 DateTime templateDateTime = DateTime.ParseExact(tempDate + " " + tempTime, "MM/dd/yyyy hh:mm:ss ", CultureInfo.InvariantCulture);
-               
+
+                // DateTime serviceDateTime = DateTime.ParseExact(date + " " + time, "MM/dd/yyyy hh:mm:ss ", CultureInfo.InvariantCulture);
+                // DateTime templateDateTime = DateTime.ParseExact(tempDate + " " + tempTime, "MM/dd/yyyy hh:mm:ss ", CultureInfo.InvariantCulture);
+                 DateTime serviceDateTime = Convert.ToDateTime(date + " " + time);
+                 DateTime templateDateTime = Convert.ToDateTime(tempDate + " " + tempTime);
                  invalid = false;
 
 

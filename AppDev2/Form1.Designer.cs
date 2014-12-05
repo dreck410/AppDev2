@@ -43,6 +43,8 @@
             this.TemplateTimeBox = new System.Windows.Forms.TextBox();
             this.GO = new System.Windows.Forms.Button();
             this.SongLeaderBox = new System.Windows.Forms.ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.TemplateList = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // label1
@@ -187,11 +189,31 @@
             this.SongLeaderBox.Size = new System.Drawing.Size(121, 28);
             this.SongLeaderBox.TabIndex = 15;
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(410, 105);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(91, 20);
+            this.label8.TabIndex = 17;
+            this.label8.Text = "Valid Dates";
+            // 
+            // TemplateList
+            // 
+            this.TemplateList.FormattingEnabled = true;
+            this.TemplateList.ItemHeight = 20;
+            this.TemplateList.Location = new System.Drawing.Point(414, 137);
+            this.TemplateList.Name = "TemplateList";
+            this.TemplateList.Size = new System.Drawing.Size(322, 324);
+            this.TemplateList.TabIndex = 18;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1010, 543);
+            this.Controls.Add(this.TemplateList);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.SongLeaderBox);
             this.Controls.Add(this.GO);
             this.Controls.Add(this.TemplateTimeBox);
@@ -231,6 +253,8 @@
         private System.Windows.Forms.TextBox TemplateTimeBox;
         private System.Windows.Forms.Button GO;
         private System.Windows.Forms.ComboBox SongLeaderBox;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ListBox TemplateList;
     }
 }
 
