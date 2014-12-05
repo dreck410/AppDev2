@@ -20,6 +20,7 @@ namespace AppDev2
             {
                 this.SongLeaderBox.Items.Add(item);
             }
+            
         }
         
         private void GO_Click(object sender, EventArgs e)
