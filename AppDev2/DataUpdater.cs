@@ -30,19 +30,24 @@ namespace AppDev2
              catch { return true; }
         }
 
-        public static void insertService(DateTime serviceDateTime, DateTime templateDateTime, string title, string theme, string SongLeader)
+        public static int insertService(DateTime serviceDateTime, DateTime templateDateTime, string title, string theme, string SongLeader)
         {
             Console.WriteLine(templateDateTime.ToString());
             Console.WriteLine(templateDateTime.ToShortDateString());
             Console.WriteLine(templateDateTime.ToShortTimeString());
             int tempServID = dataBaseConnector.Instance.getServiceID(templateDateTime.ToString());
+            if (-1 == tempServID)
+            {
+                return -2;
+            }
             /*
              * Insert records into the ServiceEvent table for the new service based on the events in the template service, 
              * except that the specific songs, personnel, and ensembles should be left blank. For example, if the user enters
              * 10/3/2010 10am for the date/time for the template service, the program should insert ServiceEvent records for the 
              * new service that have the same sequence numbers and event types as those for the 10/3/2010 10am service. (10 points)
              */
-            dataBaseConnector.Instance.insert(serviceDateTime.ToString(), tempServID, theme, title, SongLeader);
+            int result = dataBaseConnector.Instance.insert(serviceDateTime.ToString(), tempServID, theme, title, SongLeader);
+            return result;
             //dataBaseConnector.Instance.insert
            // throw new NotImplementedException();
         }

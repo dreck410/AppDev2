@@ -90,26 +90,53 @@ namespace AppDev2
             myReader = cmd.ExecuteReader();
             
             myReader.Read();
-            serviceID = Convert.ToInt32(myReader["Service_ID"]);
+            try
+            {
+                serviceID = Convert.ToInt32(myReader["Service_ID"]);
+            }
+            catch (Exception)
+            {
+                return -1;
+                throw;
+            }
             Console.WriteLine(serviceID);
             return serviceID;
         }
 
 
         // inserts data into the table
-        public void insert(string serviceTime, int templateID, string theme, string title, string songLeader)
+        //0 is good
+        // -1 songleader issue
+        // -2 temp issue
+        public int insert(string serviceTime, int templateID, string theme, string title, string songLeader)
         {
-            int personID = getPersonID(songLeader);
+            int personID = 0;
+            if (songLeader != "")
+            {
+                personID = getPersonID(songLeader);
+                if (0 > personID) { return -1; }
+            }
+            int newServiceID = getServiceID(serviceTime);
+            if (newServiceID <= 0) { return -2; }
+
             List<int> Seq_Num = new List<int>();
             List<int> EventType_ID = new List<int>();
             List<string> Notes = new List<string>();
 
             this.connect();
-            string insertService = "insert into Service values ( \'"+ serviceTime +"\', \'" + theme + "\', \'" + title + "\', null, \'N\', \'N\', \'N\', null, " + personID.ToString() + ", null)";
+            string personString = personID.ToString();
+
+            /*
+            if (personID == 0)
+            {
+                personString = "null";
+            }
+            */
+            string insertService = "insert into Service values ( \'" + serviceTime + "\', \'" + theme + "\', \'" + title + "\', null, \'N\', \'N\', \'N\', null, " + personString + ", null)";
 
             SqlCommand cmd = new SqlCommand(insertService, myConnection);
-            Console.WriteLine("Rows affected "+cmd.ExecuteNonQuery().ToString());
-            int newServiceID = getServiceID(serviceTime);
+            Console.WriteLine("Rows affected " + cmd.ExecuteNonQuery().ToString());
+
 
 
             string serviceEvents = "select Seq_Num, EventType_ID, Notes from ServiceEvent where ServiceEvent.Service_ID = " + templateID.ToString();
@@ -134,6 +161,7 @@ namespace AppDev2
                 cmd = new SqlCommand(insertServiceEvent, myConnection);
                 cmd.ExecuteNonQuery();
             }
+            return 0;
         }
 
         private int getPersonID(string songLeader)

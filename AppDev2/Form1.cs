@@ -66,15 +66,25 @@ namespace AppDev2
             }
             else
             {
-                 DataUpdater.insertService(serviceDateTime, templateDateTime, title, theme, SongLeader);
+                int result = DataUpdater.insertService(serviceDateTime, templateDateTime, title, theme, SongLeader);
+                Console.WriteLine(result);
+                generateMessage(result);
                 //update the song leader combo box to have that new guys name in it. 
-                 this.SongLeaderBox.Items.Clear();
+                this.SongLeaderBox.Items.Clear();
                 foreach (string item in dataBaseConnector.Instance.getPastSongLeaders())
                  {
                     this.SongLeaderBox.Items.Add(item);
                  }
             }
 
+        }
+
+        private void generateMessage(int result)
+        {
+            if (0 == result)
+            {
+                MessageBox.Show("Service Added");
+            }
         }
 
         private void ServiceDateBox_TextChanged(object sender, EventArgs e)
