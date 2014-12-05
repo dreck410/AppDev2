@@ -82,10 +82,13 @@ namespace AppDev2
 
         private void generateMessage(int result)
         {
-            if (0 == result)
-            {
-                MessageBox.Show("Service Added");
-            }
+            List<string> errors = new List<string>();
+            errors.Add("Service Added");
+            //errors.Add("Invalid Leader");
+            //errors.Add("Invalid Template Service Time");
+
+            MessageBox.Show(errors[(result * -1)]);
+          
         }
 
         private void ServiceDateBox_TextChanged(object sender, EventArgs e)

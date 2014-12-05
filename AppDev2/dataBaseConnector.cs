@@ -127,12 +127,12 @@ namespace AppDev2
             this.connect();
             string personString = personID.ToString();
 
-            /*
+            
             if (personID == 0)
             {
                 personString = "null";
             }
-            */
+            
             string insertService = "insert into Service values ( \'" + serviceTime + "\', \'" + theme + "\', \'" + title + "\', null, \'N\', \'N\', \'N\', null, " + personString + ", null)";
 
             SqlCommand cmd = new SqlCommand(insertService, myConnection);
