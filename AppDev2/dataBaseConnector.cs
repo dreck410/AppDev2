@@ -8,7 +8,7 @@ using System.Data;
 namespace AppDev2
 {
 
-    // singleton
+    // singletons are fun
     // manages the connection to the db
     class dataBaseConnector
     {
