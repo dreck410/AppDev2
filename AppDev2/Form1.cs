@@ -53,8 +53,6 @@ namespace AppDev2
             if (invalidEntry || serviceDate == "" || serviceTime == "" || templateDate == "" || templateTime == "") { invalidEntry = true; }
             else //Aka previous method validated entries
             {
-                //serviceDateTime = DateTime.ParseExact(serviceDate + " " + serviceTime, "MM/dd/yyyy hh:mm:ss ", CultureInfo.InvariantCulture);
-                //templateDateTime = DateTime.ParseExact(templateDate + " " + templateTime, "MM/dd/yyyy hh:mm:ss ", CultureInfo.InvariantCulture);
                 serviceDateTime = Convert.ToDateTime(serviceDate + " " + serviceTime);
                 templateDateTime = Convert.ToDateTime(templateDate + " " + templateTime);
                 //MessageBox.Show(serviceDateTime.ToString());//It looks correct-leaving this uncommented, what do you think?
@@ -80,10 +78,15 @@ namespace AppDev2
                 generateMessage(result);
                 //update the song leader combo box to have that new guys name in it. 
                 this.SongLeaderBox.Items.Clear();
+                this.TemplateList.Items.Clear();
                 foreach (string item in dataBaseConnector.Instance.getPastSongLeaders())
                  {
                     this.SongLeaderBox.Items.Add(item);
                  }
+                foreach (string date in dataBaseConnector.Instance.getValidDates())
+                {
+                    this.TemplateList.Items.Add(date);
+                }
             }
 
         }

@@ -126,9 +126,6 @@ namespace AppDev2
                 personID = getPersonID(songLeader);
                 if (0 > personID) { return -1; }
             }
-            int newServiceID = getServiceID(serviceTime);
-            if (newServiceID <= 0) { return -2; }
-
             List<int> Seq_Num = new List<int>();
             List<int> EventType_ID = new List<int>();
             List<string> Notes = new List<string>();
@@ -147,6 +144,9 @@ namespace AppDev2
             SqlCommand cmd = new SqlCommand(insertService, myConnection);
             Console.WriteLine("Rows affected " + cmd.ExecuteNonQuery().ToString());
 
+
+            int newServiceID = getServiceID(serviceTime);
+            if (newServiceID <= 0) { return -2; }
 
 
             string serviceEvents = "select Seq_Num, EventType_ID, Notes from ServiceEvent where ServiceEvent.Service_ID = " + templateID.ToString();
