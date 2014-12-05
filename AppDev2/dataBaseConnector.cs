@@ -31,7 +31,6 @@ namespace AppDev2
             }
         }
 
-
         public void connect()
         {
             //myConnection = new SqlConnection("Server=sparky.bju.edu; Database=cps301_dreck410; Trusted_Connection=True;");
