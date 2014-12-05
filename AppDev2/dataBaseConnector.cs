@@ -64,20 +64,21 @@ namespace AppDev2
             return leaders;
         }
          
-        public DataTable getPastSongs() //Gets the view data, retursn the DataTable to be loaded into the view
+        public void createSongView() //Gets the view data, retursn the DataTable to be loaded into the view
         {
             /*Create a SQL Server view named SongUsageView that displays all of the colums in the Song table,plus one named LastUsedDate. 
              * The LastUsedDate column should contain the date of the most recent service that used that song. 
              * (Exclude choral songs, but be sure to include songs which have never been used).
              * Using this view, display 20 of the least recently used songs, ordered by LastUsedDate, and then song title. 
              * Allow the user to select songs from this list, and assign them to the congregational song events. (10 points)*/
-            DataTable Songs = new DataTable();
-            using (var command = new SqlCommand("SELECT * FROM Songs", myConnection)) //Confirm name of database
-            {
-                // Loads the query results into the table
-                Songs.Load(command.ExecuteReader());
-            }
-            return Songs;
+
+            string sql = "CREATE VIEW SongUsageView AS SELECT * FROM Song"; //Still need to add in LastUsedDate into this query
+            this.connect();
+            SqlCommand cmd = new SqlCommand(sql, myConnection);
+            SqlDataReader myReader = null;
+            myReader = cmd.ExecuteReader();
+
+            
         }
 
         public int getServiceID(string templateService){
