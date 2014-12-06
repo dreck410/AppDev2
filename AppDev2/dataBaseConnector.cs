@@ -65,14 +65,18 @@ namespace AppDev2
 
 
         /*
+         * Still needs to exclude Choral songs
 select 
 Max(Service.Svc_DateTime) as 'Last Used Date'
-,Song.Song_ID, SOng.Title
+,Song.Song_ID, Song.Title, Song.Arranger, SOng.Hymnbook_Num, Song.Song_Type
+--, ServiceEvent.Service_ID
 from Song
 Left Join ServiceEvent on Song.Song_ID = ServiceEvent.Song_ID
 Left Join Service on ServiceEvent.Service_ID = Service.Service_ID
+WHERE 
+Song.Song_Type <> 'C'
 GROUP BY 
-Song.Song_ID, Song.Title
+Song.Song_ID, Song.Title, Song.Arranger, Song.Hymnbook_Num, Song.Song_Type
 Order by
 'Last Used Date'
 ,Song.Title
