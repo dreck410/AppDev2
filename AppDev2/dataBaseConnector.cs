@@ -66,7 +66,7 @@ namespace AppDev2
 
 
 
-        public void createSongView() //SUCESSFULLY CREATES VIEW JUST NEED TO ADJUST LastUsedDate To be linked to most recently used
+        public void createSongView() 
         {
             
             try
@@ -107,6 +107,17 @@ namespace AppDev2
                 SqlDataReader myReader = null;
                 myReader = cmd.ExecuteReader();
             }
+            try
+            {
+                string storeProc = @"CREATE PROC LeastUsedSongs                AS                SELECT Top 10                SongUsageView.Title                FROM SongUsageView                ORDER BY LastUsedDate ASC, Title ";
+                this.connect();
+                SqlCommand cmd = new SqlCommand(storeProc, myConnection);
+                SqlDataReader myReader = null;
+                myReader = cmd.ExecuteReader();
+
+            }
+            catch
+            { ;}
 
             
         }
