@@ -62,7 +62,24 @@ namespace AppDev2
             }
             return leaders;
         }
-         
+
+
+        /*
+select 
+Max(Service.Svc_DateTime) as 'Last Used Date'
+,Song.Song_ID, SOng.Title
+--, ServiceEvent.Service_ID
+from Song
+Left Join ServiceEvent on Song.Song_ID = ServiceEvent.Song_ID
+Left Join Service on ServiceEvent.Service_ID = Service.Service_ID
+GROUP BY 
+Song.Song_ID, Song.Title
+
+Order by
+'Last Used Date'
+,Song.Title
+         */
+
         public void createSongView() //SUCESSFULLY CREATES VIEW JUST NEED TO ADJUST LastUsedDate To be linked to most recently used
         {
             /*Create a SQL Server view named SongUsageView that displays all of the colums in the Song table,plus one named LastUsedDate. 

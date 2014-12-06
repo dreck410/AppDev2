@@ -135,5 +135,15 @@ namespace AppDev2
         {
 
         }
+
+        private void TemplateList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label8_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

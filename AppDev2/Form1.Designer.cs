@@ -194,9 +194,10 @@
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(410, 105);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(91, 20);
+            this.label8.Size = new System.Drawing.Size(161, 20);
             this.label8.TabIndex = 17;
-            this.label8.Text = "Valid Dates";
+            this.label8.Text = "Valid Template Dates";
+            this.label8.Click += new System.EventHandler(this.label8_Click);
             // 
             // TemplateList
             // 
@@ -204,8 +205,9 @@
             this.TemplateList.ItemHeight = 20;
             this.TemplateList.Location = new System.Drawing.Point(414, 137);
             this.TemplateList.Name = "TemplateList";
-            this.TemplateList.Size = new System.Drawing.Size(322, 324);
+            this.TemplateList.Size = new System.Drawing.Size(271, 164);
             this.TemplateList.TabIndex = 18;
+            this.TemplateList.SelectedIndexChanged += new System.EventHandler(this.TemplateList_SelectedIndexChanged);
             // 
             // Form1
             // 
