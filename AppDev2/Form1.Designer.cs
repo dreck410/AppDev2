@@ -45,6 +45,11 @@
             this.SongLeaderBox = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.TemplateList = new System.Windows.Forms.ListBox();
+            this.LastUsedSongsBox = new System.Windows.Forms.ListBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.ServiceSongEventBox = new System.Windows.Forms.ListBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -209,11 +214,62 @@
             this.TemplateList.TabIndex = 18;
             this.TemplateList.SelectedIndexChanged += new System.EventHandler(this.TemplateList_SelectedIndexChanged);
             // 
+            // LastUsedSongsBox
+            // 
+            this.LastUsedSongsBox.FormattingEnabled = true;
+            this.LastUsedSongsBox.ItemHeight = 20;
+            this.LastUsedSongsBox.Location = new System.Drawing.Point(743, 137);
+            this.LastUsedSongsBox.Name = "LastUsedSongsBox";
+            this.LastUsedSongsBox.Size = new System.Drawing.Size(254, 304);
+            this.LastUsedSongsBox.TabIndex = 19;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(762, 102);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(98, 20);
+            this.label9.TabIndex = 20;
+            this.label9.Text = "Song Usage";
+            // 
+            // ServiceSongEventBox
+            // 
+            this.ServiceSongEventBox.FormattingEnabled = true;
+            this.ServiceSongEventBox.ItemHeight = 20;
+            this.ServiceSongEventBox.Location = new System.Drawing.Point(1138, 137);
+            this.ServiceSongEventBox.Name = "ServiceSongEventBox";
+            this.ServiceSongEventBox.Size = new System.Drawing.Size(254, 304);
+            this.ServiceSongEventBox.TabIndex = 21;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(1134, 102);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(170, 20);
+            this.label10.TabIndex = 22;
+            this.label10.Text = "Congregational Events";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(1003, 244);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(118, 51);
+            this.button1.TabIndex = 23;
+            this.button1.Text = ">>";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1010, 543);
+            this.ClientSize = new System.Drawing.Size(1494, 532);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.ServiceSongEventBox);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.LastUsedSongsBox);
             this.Controls.Add(this.TemplateList);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.SongLeaderBox);
@@ -257,6 +313,11 @@
         private System.Windows.Forms.ComboBox SongLeaderBox;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ListBox TemplateList;
+        private System.Windows.Forms.ListBox LastUsedSongsBox;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.ListBox ServiceSongEventBox;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Button button1;
     }
 }
 

@@ -72,6 +72,7 @@ namespace AppDev2
                 //MessageBox.Show(serviceDateTime.ToString());//It looks correct-leaving this uncommented, what do you think?
             
             }
+            int serviceID = dataBaseConnector.Instance.getServiceID(serviceDateTime.ToString());
             string title = TitleBox.Text;
             string theme = ThemeBox.Text;
 
@@ -90,19 +91,33 @@ namespace AppDev2
                 int result = DataUpdater.insertService(serviceDateTime, templateDateTime, title, theme, SongLeader);
                 Console.WriteLine(result);
                 generateMessage(result);
-                //update the song leader combo box to have that new guys name in it. 
-                this.SongLeaderBox.Items.Clear();
-                this.TemplateList.Items.Clear();
-                foreach (string item in dataBaseConnector.Instance.getPastSongLeaders())
-                 {
-                    this.SongLeaderBox.Items.Add(item);
-                 }
-                foreach (string date in dataBaseConnector.Instance.getValidDates())
-                {
-                    this.TemplateList.Items.Add(date);
-                }
+                
+                UpdateFields(serviceID.ToString());
+                
+
             }
 
+        }
+
+        private void UpdateFields(string servID)
+        {
+
+            this.SongLeaderBox.Items.Clear();
+            foreach (string item in dataBaseConnector.Instance.getPastSongLeaders())
+            {
+                this.SongLeaderBox.Items.Add(item);
+            }
+
+            this.TemplateList.Items.Clear();
+            foreach (string date in dataBaseConnector.Instance.getValidDates())
+            {
+                this.TemplateList.Items.Add(date);
+            }
+            this.ServiceSongEventBox.Items.Clear();
+            foreach (string congSong in dataBaseConnector.Instance.getCongSongs(servID))
+            {
+                this.ServiceSongEventBox.Items.Add(congSong);
+            }
         }
 
         private void generateMessage(int result)
@@ -142,6 +157,11 @@ namespace AppDev2
         }
 
         private void label8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
         {
 
         }

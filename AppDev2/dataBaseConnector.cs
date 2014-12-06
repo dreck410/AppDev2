@@ -12,7 +12,7 @@ namespace AppDev2
     // manages the connection to the db
     class dataBaseConnector
     {
-
+        int addedServiceID = -1;
         SqlConnection myConnection;
         private dataBaseConnector()
         {
@@ -111,11 +111,11 @@ namespace AppDev2
             
         }
 
-        public int getServiceID(string templateService){
+        public int getServiceID(string timeOfService){
             int serviceID = -1;
 
             this.connect();
-            string sql = "SELECT Service.Service_ID FROM Service WHERE Service.Svc_DateTime = \'" + templateService + "\'";
+            string sql = "SELECT Service.Service_ID FROM Service WHERE Service.Svc_DateTime = \'" + timeOfService + "\'";
             SqlCommand cmd = new SqlCommand(sql, myConnection);
             SqlDataReader myReader = null;
             myReader = cmd.ExecuteReader();
@@ -192,6 +192,7 @@ namespace AppDev2
                 cmd = new SqlCommand(insertServiceEvent, myConnection);
                 cmd.ExecuteNonQuery();
             }
+            addedServiceID = newServiceID;
             return 0;
         }
 
@@ -250,6 +251,34 @@ namespace AppDev2
                 Console.WriteLine(d);
             }
             return Dates;
+        }
+
+        internal IEnumerable<string> getCongSongs(string servID)
+        {
+            List<string> congSongs = new List<string>();
+
+            string congSongsSQL = @"select distinct 
+                                    ServiceEvent.Seq_Num
+                                    , EventType.Description
+                                    , Song.Title
+                                    from ServiceEvent
+                                    Left Join EventType on ServiceEvent.EventType_ID = EventType.EventType_ID
+                                    Left Join Song on ServiceEvent.Song_ID = Song.Song_ID
+                                    WHERE
+                                    ServiceEvent.Service_ID = " + addedServiceID.ToString() + @"
+                                    and (ServiceEvent.EventType_ID = 5 or ServiceEvent.EventType_ID = 11)
+                                    and (ServiceEvent.Song_ID = Song.Song_ID or ServiceEvent.Song_ID is null)";
+            this.connect();
+            SqlCommand cmd = new SqlCommand(congSongsSQL, myConnection);
+            SqlDataReader myReader = null;
+            myReader = cmd.ExecuteReader();
+            while (myReader.Read())
+            {
+                string line = myReader["Seq_Num"].ToString() + " | " + myReader["Description"].ToString() + " | " + myReader["Title"].ToString();
+                congSongs.Add(line);
+            }
+
+            return congSongs;
         }
     }
 }
