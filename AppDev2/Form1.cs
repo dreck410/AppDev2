@@ -27,6 +27,10 @@ namespace AppDev2
             }
             dataBaseConnector.Instance.createSongView();
 
+            foreach (string song in dataBaseConnector.Instance.getSongView())
+            {
+                this.LastUsedSongsBox.Items.Add(song);
+            }
             //Daniel TODO
             /*
              * To help the songleader choose songs for each service, create a view named SongUsageView 
@@ -101,7 +105,7 @@ namespace AppDev2
 
         private void UpdateFields(string servID)
         {
-
+            dataBaseConnector.Instance.createSongView();
             this.SongLeaderBox.Items.Clear();
             foreach (string item in dataBaseConnector.Instance.getPastSongLeaders())
             {
@@ -113,11 +117,19 @@ namespace AppDev2
             {
                 this.TemplateList.Items.Add(date);
             }
+
             this.ServiceSongEventBox.Items.Clear();
             foreach (string congSong in dataBaseConnector.Instance.getCongSongs())
             {
                 this.ServiceSongEventBox.Items.Add(congSong);
             }
+
+            this.LastUsedSongsBox.Items.Clear();
+            foreach (string song in dataBaseConnector.Instance.getSongView())
+            {
+                this.LastUsedSongsBox.Items.Add(song);
+            }
+
         }
 
         private void generateMessage(int result)

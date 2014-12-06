@@ -218,9 +218,9 @@
             // 
             this.LastUsedSongsBox.FormattingEnabled = true;
             this.LastUsedSongsBox.ItemHeight = 20;
-            this.LastUsedSongsBox.Location = new System.Drawing.Point(743, 137);
+            this.LastUsedSongsBox.Location = new System.Drawing.Point(766, 137);
             this.LastUsedSongsBox.Name = "LastUsedSongsBox";
-            this.LastUsedSongsBox.Size = new System.Drawing.Size(254, 304);
+            this.LastUsedSongsBox.Size = new System.Drawing.Size(380, 304);
             this.LastUsedSongsBox.TabIndex = 19;
             // 
             // label9
@@ -236,15 +236,15 @@
             // 
             this.ServiceSongEventBox.FormattingEnabled = true;
             this.ServiceSongEventBox.ItemHeight = 20;
-            this.ServiceSongEventBox.Location = new System.Drawing.Point(1138, 137);
+            this.ServiceSongEventBox.Location = new System.Drawing.Point(1287, 137);
             this.ServiceSongEventBox.Name = "ServiceSongEventBox";
-            this.ServiceSongEventBox.Size = new System.Drawing.Size(254, 304);
+            this.ServiceSongEventBox.Size = new System.Drawing.Size(420, 304);
             this.ServiceSongEventBox.TabIndex = 21;
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(1134, 102);
+            this.label10.Location = new System.Drawing.Point(1283, 102);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(170, 20);
             this.label10.TabIndex = 22;
@@ -252,7 +252,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(1003, 244);
+            this.button1.Location = new System.Drawing.Point(1152, 250);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(118, 51);
             this.button1.TabIndex = 23;
@@ -264,7 +264,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1494, 532);
+            this.ClientSize = new System.Drawing.Size(1739, 532);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.ServiceSongEventBox);

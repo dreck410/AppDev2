@@ -294,5 +294,22 @@ namespace AppDev2
             }
             return congSongs;
         }
+
+        internal IEnumerable<string> getSongView()
+        {
+            List<string> congSongs = new List<string>();
+            string getCongSongsSQL = @"select *
+                                       from SongUsageView";
+            this.connect();
+            SqlCommand cmd = new SqlCommand(getCongSongsSQL, myConnection);
+            SqlDataReader myReader = null;
+            myReader = cmd.ExecuteReader();
+            while (myReader.Read())
+            {
+                string line = myReader["LastUsedDate"].ToString() + " | " + myReader["Title"].ToString() + " | " + myReader["HymnBook_Num"].ToString();
+                congSongs.Add(line);
+            }
+            return congSongs;
+        }
     }
 }
