@@ -64,34 +64,25 @@ namespace AppDev2
         }
 
 
-        /*
-         * Still needs to exclude Choral songs
-select 
-Max(Service.Svc_DateTime) as 'Last Used Date'
-,Song.Song_ID, Song.Title, Song.Arranger, SOng.Hymnbook_Num, Song.Song_Type
---, ServiceEvent.Service_ID
-from Song
-Left Join ServiceEvent on Song.Song_ID = ServiceEvent.Song_ID
-Left Join Service on ServiceEvent.Service_ID = Service.Service_ID
-WHERE 
-Song.Song_Type <> 'C'
-GROUP BY 
-Song.Song_ID, Song.Title, Song.Arranger, Song.Hymnbook_Num, Song.Song_Type
-Order by
-'Last Used Date'
-,Song.Title
-         */
+
 
         public void createSongView() //SUCESSFULLY CREATES VIEW JUST NEED TO ADJUST LastUsedDate To be linked to most recently used
         {
-            /*Create a SQL Server view named SongUsageView that displays all of the colums in the Song table,plus one named LastUsedDate. 
-             * The LastUsedDate column should contain the date of the most recent service that used that song. 
-             * (Exclude choral songs, but be sure to include songs which have never been used).
-             * Using this view, display 20 of the least recently used songs, ordered by LastUsedDate, and then song title. 
-             * Allow the user to select songs from this list, and assign them to the congregational song events. (10 points)*/
+            
             try
             {
-                string sql = "CREATE VIEW SongUsageView AS SELECT dbo.Song.*,dbo.Service.Svc_DateTime as 'LastUsedDate'FROM Song,Service"; //Still need to add in LastUsedDate into this query
+                string sql = @"CREATE VIEW SongUsageView AS select 
+                Max(Service.Svc_DateTime) as LastUsedDate
+                ,Song.Song_ID, Song.Title, Song.Arranger, Song.Hymnbook_Num, Song.Song_Type
+                from Song
+                Left Join ServiceEvent on Song.Song_ID = ServiceEvent.Song_ID
+                Left Join Service on ServiceEvent.Service_ID = Service.Service_ID
+                WHERE 
+                Song.Song_Type <> 'C'
+                GROUP BY 
+                Song.Song_ID, Song.Title, Song.Arranger, Song.Hymnbook_Num, Song.Song_Type
+                ";
+                    
                 this.connect();
                 SqlCommand cmd = new SqlCommand(sql, myConnection);
                 SqlDataReader myReader = null;
@@ -99,7 +90,18 @@ Order by
             }
             catch
             {
-                string sql = "ALTER VIEW SongUsageView AS SELECT dbo.Song.*,dbo.Service.Svc_DateTime as 'LastUsedDate'FROM Song,Service"; //Still need to add in LastUsedDate into this query
+                string sql = @"ALTER VIEW SongUsageView AS select 
+                Max(Service.Svc_DateTime) as LastUsedDate
+                ,Song.Song_ID, Song.Title, Song.Arranger, Song.Hymnbook_Num, Song.Song_Type
+                from Song
+                Left Join ServiceEvent on Song.Song_ID = ServiceEvent.Song_ID
+                Left Join Service on ServiceEvent.Service_ID = Service.Service_ID
+                WHERE 
+                Song.Song_Type <> 'C'
+                GROUP BY 
+                Song.Song_ID, Song.Title, Song.Arranger, Song.Hymnbook_Num, Song.Song_Type
+                "; 
+                
                 this.connect();
                 SqlCommand cmd = new SqlCommand(sql, myConnection);
                 SqlDataReader myReader = null;
