@@ -66,7 +66,7 @@ namespace AppDev2
 
 
 
-        public void createSongView() //SUCESSFULLY CREATES VIEW JUST NEED TO ADJUST LastUsedDate To be linked to most recently used
+        public void createSongView() 
         {
             
             try
@@ -107,15 +107,31 @@ namespace AppDev2
                 SqlDataReader myReader = null;
                 myReader = cmd.ExecuteReader();
             }
+            try
+            {
+                string storeProc = @"CREATE PROC LeastUsedSongs
+                AS
+                SELECT Top 10
+                SongUsageView.Title
+                FROM SongUsageView
+                ORDER BY LastUsedDate ASC, Title ";
+                this.connect();
+                SqlCommand cmd = new SqlCommand(storeProc, myConnection);
+                SqlDataReader myReader = null;
+                myReader = cmd.ExecuteReader();
+
+            }
+            catch
+            { ;}
 
             
         }
 
-        public int getServiceID(string timeOfService){
+        public int getServiceID(string templateService){
             int serviceID = -1;
 
             this.connect();
-            string sql = "SELECT Service.Service_ID FROM Service WHERE Service.Svc_DateTime = \'" + timeOfService + "\'";
+            string sql = "SELECT Service.Service_ID FROM Service WHERE Service.Svc_DateTime = \'" + templateService + "\'";
             SqlCommand cmd = new SqlCommand(sql, myConnection);
             SqlDataReader myReader = null;
             myReader = cmd.ExecuteReader();
@@ -253,23 +269,22 @@ namespace AppDev2
             return Dates;
         }
 
-        internal IEnumerable<string> getCongSongs(string servID)
+        internal IEnumerable<string> getCongSongs()
         {
-            List<string> congSongs = new List<string>();
-
-            string congSongsSQL = @"select distinct 
-                                    ServiceEvent.Seq_Num
-                                    , EventType.Description
-                                    , Song.Title
-                                    from ServiceEvent
-                                    Left Join EventType on ServiceEvent.EventType_ID = EventType.EventType_ID
-                                    Left Join Song on ServiceEvent.Song_ID = Song.Song_ID
-                                    WHERE
-                                    ServiceEvent.Service_ID = " + addedServiceID.ToString() + @"
-                                    and (ServiceEvent.EventType_ID = 5 or ServiceEvent.EventType_ID = 11)
-                                    and (ServiceEvent.Song_ID = Song.Song_ID or ServiceEvent.Song_ID is null)";
+            List<string> congSongs= new List<string>();
+            string getCongSongsSQL = @"select distinct 
+                                        ServiceEvent.Seq_Num
+                                        , EventType.Description
+                                        , Song.Title
+                                        from ServiceEvent
+                                        Left Join EventType on ServiceEvent.EventType_ID = EventType.EventType_ID
+                                        Left Join Song on ServiceEvent.Song_ID = Song.Song_ID
+                                        WHERE
+                                        ServiceEvent.Service_ID = " + addedServiceID.ToString() + @" 
+                                        and (ServiceEvent.EventType_ID = 5 or ServiceEvent.EventType_ID = 11)
+                                        and (ServiceEvent.Song_ID = Song.Song_ID or ServiceEvent.Song_ID is null)";
             this.connect();
-            SqlCommand cmd = new SqlCommand(congSongsSQL, myConnection);
+            SqlCommand cmd = new SqlCommand(getCongSongsSQL, myConnection);
             SqlDataReader myReader = null;
             myReader = cmd.ExecuteReader();
             while (myReader.Read())
@@ -277,7 +292,6 @@ namespace AppDev2
                 string line = myReader["Seq_Num"].ToString() + " | " + myReader["Description"].ToString() + " | " + myReader["Title"].ToString();
                 congSongs.Add(line);
             }
-
             return congSongs;
         }
     }

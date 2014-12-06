@@ -114,7 +114,7 @@ namespace AppDev2
                 this.TemplateList.Items.Add(date);
             }
             this.ServiceSongEventBox.Items.Clear();
-            foreach (string congSong in dataBaseConnector.Instance.getCongSongs(servID))
+            foreach (string congSong in dataBaseConnector.Instance.getCongSongs())
             {
                 this.ServiceSongEventBox.Items.Add(congSong);
             }
