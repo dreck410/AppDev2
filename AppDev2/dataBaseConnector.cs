@@ -68,13 +68,11 @@ namespace AppDev2
 select 
 Max(Service.Svc_DateTime) as 'Last Used Date'
 ,Song.Song_ID, SOng.Title
---, ServiceEvent.Service_ID
 from Song
 Left Join ServiceEvent on Song.Song_ID = ServiceEvent.Song_ID
 Left Join Service on ServiceEvent.Service_ID = Service.Service_ID
 GROUP BY 
 Song.Song_ID, Song.Title
-
 Order by
 'Last Used Date'
 ,Song.Title
