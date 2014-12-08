@@ -185,7 +185,12 @@ namespace AppDev2
             }
             else
             {
-                // not a new time. 
+                /* not a new time. 
+
+
+            string updateEvent = @"UPDATE Service set ..... where Svc_DateTime = serviceTime
+               could do update instead of insert...
+                 *  */
                 return -3;
             }
             this.connect();
