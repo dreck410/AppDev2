@@ -34,22 +34,17 @@ namespace AppDev2
             }
         }
 
-        public bool connect(string database,string user,string pass, int btn)
+        public bool connect()
         {
-
+            string database = ConnetionInfo.database;
+            string user = ConnetionInfo.username;
+            string pass = ConnetionInfo.pass;
+            int btn = ConnetionInfo.option;
+            
             //myConnection = new SqlConnection("Server=sparky.bju.edu; Database=cps301_dreck410; Trusted_Connection=True;");
             if (btn == 1)
             {
                 myConnection = new SqlConnection("Server=sparky.bju.edu;Database=" + database + ";User Id=" + user + ";Password=" + pass + ";");
-            }
-            if (btn == 2)
-            {
-                myConnection = new SqlConnection("Server=sparky.bju.edu;Database=cps301_ckost598;User Id=ckost598;Password=ckost598;");
-            }
-            
-            if (btn == 3)
-            {
-                myConnection = new SqlConnection("Server=sparky.bju.edu;Database=cps301_dreck410;User Id=dreck410;Password=dreck410;");
             }
             try
             {
@@ -65,11 +60,16 @@ namespace AppDev2
             }
         }
 
+        internal bool connectInfo(string database, string username, string password, int p)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<string> getPastSongLeaders()
         {
             List<string> leaders = new List<string>();
             string sql = "select distinct (Person.First_Name + ' ' + Person.Last_Name) as Name from service, Person where Service.Songleader_ID = Person.Person_ID";
-            this.connect(ConnetionInfo.database,ConnetionInfo.username,ConnetionInfo.pass,ConnetionInfo.option);
+            this.connect();
             SqlCommand cmd = new SqlCommand(sql, myConnection);
             SqlDataReader myReader = null;
             myReader = cmd.ExecuteReader();
@@ -100,7 +100,7 @@ namespace AppDev2
                 Song.Song_ID, Song.Title, Song.Arranger, Song.Hymnbook_Num, Song.Song_Type
                 ";
 
-                this.connect(ConnetionInfo.database, ConnetionInfo.username, ConnetionInfo.pass, ConnetionInfo.option);
+                this.connect();
                 SqlCommand cmd = new SqlCommand(sql, myConnection);
                 SqlDataReader myReader = null;
                 myReader = cmd.ExecuteReader();
@@ -119,7 +119,7 @@ namespace AppDev2
                 Song.Song_ID, Song.Title, Song.Arranger, Song.Hymnbook_Num, Song.Song_Type
                 ";
 
-                this.connect(ConnetionInfo.database, ConnetionInfo.username, ConnetionInfo.pass, ConnetionInfo.option);
+                this.connect();
                 SqlCommand cmd = new SqlCommand(sql, myConnection);
                 SqlDataReader myReader = null;
                 myReader = cmd.ExecuteReader();
@@ -132,7 +132,7 @@ namespace AppDev2
                 SongUsageView.Title
                 FROM SongUsageView
                 ORDER BY LastUsedDate ASC, Title ";
-                this.connect(ConnetionInfo.database, ConnetionInfo.username, ConnetionInfo.pass, ConnetionInfo.option);
+                this.connect();
                 SqlCommand cmd = new SqlCommand(storeProc, myConnection);
                 SqlDataReader myReader = null;
                 myReader = cmd.ExecuteReader();
@@ -147,7 +147,7 @@ namespace AppDev2
         public int getServiceID(string templateService){
             int serviceID = -1;
 
-            this.connect(ConnetionInfo.database, ConnetionInfo.username, ConnetionInfo.pass, ConnetionInfo.option);
+            this.connect();
             string sql = "SELECT Service.Service_ID FROM Service WHERE Service.Svc_DateTime = \'" + templateService + "\'";
             SqlCommand cmd = new SqlCommand(sql, myConnection);
             SqlDataReader myReader = null;
@@ -187,69 +187,74 @@ namespace AppDev2
             List<int> EventType_ID = new List<int>();
             List<string> Notes = new List<string>();
 
-            this.connect(ConnetionInfo.database, ConnetionInfo.username, ConnetionInfo.pass, ConnetionInfo.option);
+            this.connect();
             string personString = personID.ToString();
+            int newServiceID = -1;
 
-            
             if (personID == 0)
             {
                 personString = "null";
             }
-            string insertService = "";
-            if (newTime(serviceTime))
+            if (!newTime(serviceTime))
             {
-                insertService = "insert into Service values ( \'" + serviceTime + "\', \'" + theme + "\', \'" + title + "\', null, \'N\', \'N\', \'N\', null, " + personString + ", null)";
+                // service is already created... update instead??
+
+                // update service...
+
+
+                
+                newServiceID = getServiceID(serviceTime);
+                string removeEvents = "delete from ServiceEvent where ServiceEvent.Service_ID = " + addedServiceID;
+                this.connect();
+                return -3;
             }
             else
             {
-                /* not a new time. 
 
+                string insertService = "";
+                insertService = "insert into Service values ( \'" + serviceTime + "\', \'" + theme + "\', \'" + title + "\', null, \'N\', \'N\', \'N\', null, " + personString + ", null)";
 
-            string updateEvent = @"UPDATE Service set ..... where Svc_DateTime = serviceTime
-               could do update instead of insert...
-                 *  */
-                return -3;
-            }
-            this.connect(ConnetionInfo.database, ConnetionInfo.username, ConnetionInfo.pass, ConnetionInfo.option);
-            SqlCommand cmd = new SqlCommand(insertService, myConnection);
-            cmd.ExecuteNonQuery();
-
-            // needs to get the ID of the new service after the new service has been created!
-            int newServiceID = getServiceID(serviceTime);
-            if (newServiceID <= 0) { return -2; }
-
-
-            string serviceEvents = "select Seq_Num, EventType_ID, Notes from ServiceEvent where ServiceEvent.Service_ID = " + templateID.ToString();
-
-            this.connect(ConnetionInfo.database, ConnetionInfo.username, ConnetionInfo.pass, ConnetionInfo.option);
-            cmd = new SqlCommand(serviceEvents, myConnection);
-            SqlDataReader myReader = null;
-            myReader = cmd.ExecuteReader();
-            int size = 0;
-            while (myReader.Read())
-            {
-                Seq_Num.Add(Convert.ToInt32(myReader["Seq_Num"]));
-                EventType_ID.Add(Convert.ToInt32(myReader["EventType_ID"]));
-                Notes.Add(myReader["Notes"].ToString());
-                ++size;
-            }
-            for (int i = 0; i < size; ++i)
-            {
-                string insertServiceEvent = "insert into ServiceEvent values ( " + newServiceID.ToString() + ", " + Seq_Num[i].ToString() + ", " + EventType_ID[i] + " , '" + Notes[i] + "', 'N', null, null, null)";
-
-                this.connect(ConnetionInfo.database, ConnetionInfo.username, ConnetionInfo.pass, ConnetionInfo.option);
-                cmd = new SqlCommand(insertServiceEvent, myConnection);
+                this.connect();
+                SqlCommand cmd = new SqlCommand(insertService, myConnection);
                 cmd.ExecuteNonQuery();
+
+                // needs to get the ID of the new service after the new service has been created!
+                newServiceID = getServiceID(serviceTime);
+                if (newServiceID <= 0) { return -2; }
+
+
+                string serviceEvents = "select Seq_Num, EventType_ID, Notes from ServiceEvent where ServiceEvent.Service_ID = " + templateID.ToString();
+
+                this.connect();
+                cmd = new SqlCommand(serviceEvents, myConnection);
+                SqlDataReader myReader = null;
+                myReader = cmd.ExecuteReader();
+                int size = 0;
+                while (myReader.Read())
+                {
+                    Seq_Num.Add(Convert.ToInt32(myReader["Seq_Num"]));
+                    EventType_ID.Add(Convert.ToInt32(myReader["EventType_ID"]));
+                    Notes.Add(myReader["Notes"].ToString());
+                    ++size;
+                }
+                for (int i = 0; i < size; ++i)
+                {
+                    string insertServiceEvent = "insert into ServiceEvent values ( " + newServiceID.ToString() + ", " + Seq_Num[i].ToString() + ", " + EventType_ID[i] + " , '" + Notes[i] + "', 'N', null, null, null)";
+
+                    this.connect();
+                    cmd = new SqlCommand(insertServiceEvent, myConnection);
+                    cmd.ExecuteNonQuery();
+                }
+                addedServiceID = newServiceID;
+                return 0;
             }
-            addedServiceID = newServiceID;
-            return 0;
         }
 
         private bool newTime(string serviceTime)
         {
             bool output = false;
             string selectService = "select * from Service where Svc_DateTime = '" + serviceTime + "'";
-            this.connect(ConnetionInfo.database, ConnetionInfo.username, ConnetionInfo.pass, ConnetionInfo.option);
+            this.connect();
             SqlCommand cmd = new SqlCommand(selectService, myConnection);
             SqlDataReader myReader = null;
             myReader = cmd.ExecuteReader();
@@ -279,11 +284,11 @@ namespace AppDev2
             catch (Exception e)
             {
                 string[] fullName = songLeader.Split(' ');
-                this.connect(ConnetionInfo.database, ConnetionInfo.username, ConnetionInfo.pass, ConnetionInfo.option);
+                this.connect();
                 sql = "select Person.Person_ID from Person where\'" + fullName[0] + "\' = Person.First_Name and \'" + fullName[1] + "\' = Person.Last_Name";
 
             }
-            this.connect(ConnetionInfo.database, ConnetionInfo.username, ConnetionInfo.pass, ConnetionInfo.option);
+            this.connect();
             SqlCommand cmd = new SqlCommand(sql, myConnection);
             SqlDataReader myReader = null;
             myReader = cmd.ExecuteReader();
@@ -306,7 +311,7 @@ namespace AppDev2
         {
             List<string> Dates = new List<string>();
             string sql = "select distinct Svc_DateTime from service";
-            this.connect(ConnetionInfo.database, ConnetionInfo.username, ConnetionInfo.pass, ConnetionInfo.option);
+            this.connect();
             SqlCommand cmd = new SqlCommand(sql, myConnection);
             SqlDataReader myReader = null;
             myReader = cmd.ExecuteReader();
@@ -334,7 +339,7 @@ namespace AppDev2
                                         ServiceEvent.Service_ID = " + addedServiceID.ToString() + @" 
                                         and (ServiceEvent.EventType_ID = 5 or ServiceEvent.EventType_ID = 11)
                                         and (ServiceEvent.Song_ID = Song.Song_ID or ServiceEvent.Song_ID is null)";
-            this.connect(ConnetionInfo.database, ConnetionInfo.username, ConnetionInfo.pass, ConnetionInfo.option);
+            this.connect();
             SqlCommand cmd = new SqlCommand(getCongSongsSQL, myConnection);
             SqlDataReader myReader = null;
             myReader = cmd.ExecuteReader();
@@ -352,7 +357,7 @@ namespace AppDev2
             string getCongSongsSQL = @"select *
                                         from SongUsageView
                                         order by LastUsedDate, Title";
-            this.connect(ConnetionInfo.database, ConnetionInfo.username, ConnetionInfo.pass, ConnetionInfo.option);
+            this.connect();
             SqlCommand cmd = new SqlCommand(getCongSongsSQL, myConnection);
             SqlDataReader myReader = null;
             myReader = cmd.ExecuteReader();
@@ -380,7 +385,7 @@ namespace AppDev2
             string updateEvent = @"UPDATE ServiceEvent
                                     SET Song_ID= " + songID.ToString() + @" 
                                     where Event_ID = " + eventID.ToString();
-            this.connect(ConnetionInfo.database, ConnetionInfo.username, ConnetionInfo.pass, ConnetionInfo.option);
+            this.connect();
             SqlCommand cmd = new SqlCommand(updateEvent, myConnection);
             cmd.ExecuteNonQuery();
 
@@ -392,7 +397,7 @@ namespace AppDev2
             Seq_Num = Seq_Num.Trim();
             Descr = Descr.Trim();
             string EventID = @"select * from ServiceEvent where Seq_Num = " + Seq_Num.ToString() + " and Service_ID = " + addedServiceID.ToString();
-            this.connect(ConnetionInfo.database, ConnetionInfo.username, ConnetionInfo.pass, ConnetionInfo.option);
+            this.connect();
             SqlCommand cmd = new SqlCommand(EventID, myConnection);
             SqlDataReader myReader = null;
             myReader = cmd.ExecuteReader();
@@ -404,7 +409,7 @@ namespace AppDev2
         {
             Title = Title.Trim();
             string songID = @"select Song_ID from Song where Title = '" + Title + "'";
-            this.connect(ConnetionInfo.database, ConnetionInfo.username, ConnetionInfo.pass, ConnetionInfo.option);
+            this.connect();
             SqlCommand cmd = new SqlCommand(songID, myConnection);
             SqlDataReader myReader = null;
             myReader = cmd.ExecuteReader();
@@ -416,5 +421,7 @@ namespace AppDev2
         {
             addedServiceID = p;
         }
+
+
     }
 }

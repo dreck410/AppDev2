@@ -120,7 +120,6 @@ namespace AppDev2
 
         private bool isDirty(string str)
         {
-            int i = str.IndexOf(';');
             if (0 <= str.IndexOf(';')) { return true; }
             if (0 <= str.IndexOf('"')) { return true; }
             if (0 <= str.IndexOf('\'')) { return true; }
