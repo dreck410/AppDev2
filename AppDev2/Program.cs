@@ -21,7 +21,11 @@ namespace AppDev2
             
 
             Application.Run(new LoginForm());
-            Application.Run(new Form1());
+            if (ConnetionInfo.success)
+            {
+                Application.Run(new Form1());
+            }
+            else { Application.Exit(); }
         }
     }
 }

@@ -15,6 +15,7 @@ namespace AppDev2
         public LoginForm()
         {
             InitializeComponent();
+            MessageBox.Show("Hello Dr. Knisely, for grading purposes, it is probably best to use Koster's database. Recker's is spammed with tons of random test data. Thanks!");
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -24,7 +25,8 @@ namespace AppDev2
             string password = ConnetionInfo.pass =textBox3.Text;
             ConnetionInfo.option = 1;
             bool isWorking = dataBaseConnector.Instance.connect();
-            if (isWorking) { this.Close(); } else { MessageBox.Show("Please try again"); }
+            if (isWorking) { ConnetionInfo.success = true; this.Close(); } 
+            else { MessageBox.Show("Please try again"); ConnetionInfo.success = false; }
         }
 
         private void button3_Click(object sender, EventArgs e) //Koster
@@ -36,7 +38,8 @@ namespace AppDev2
             bool isWorking = dataBaseConnector.Instance.connect();
           //  ConnetionInfo.database = ConnetionInfo.username = ConnetionInfo.pass = "";
           //  ConnetionInfo.option = 2;
-             if (isWorking) { this.Close(); } else { MessageBox.Show("Please try again"); }
+            if (isWorking) { ConnetionInfo.success = true; this.Close(); } 
+            else { MessageBox.Show("Please try again"); ConnetionInfo.success = false; }
         }
 
         private void button2_Click(object sender, EventArgs e) //Recker
@@ -48,7 +51,8 @@ namespace AppDev2
             bool isWorking = dataBaseConnector.Instance.connect();
             //ConnetionInfo.database = ConnetionInfo.username = ConnetionInfo.pass = "";
            // ConnetionInfo.option = 3;
-            if (isWorking) { this.Close(); } else { MessageBox.Show("Please try again"); }
+            if (isWorking) { ConnetionInfo.success = true; this.Close(); }
+            else { ConnetionInfo.success = false;  MessageBox.Show("Please try again"); }
         }
     }
 }
