@@ -322,6 +322,7 @@ namespace AppDev2
         internal IEnumerable<string> getCongSongs()
         {
             List<string> congSongs= new List<string>();
+            if (addedServiceID == -1) { return congSongs; }
             string getCongSongsSQL = @"select distinct 
                                         ServiceEvent.Seq_Num
                                         , EventType.Description
@@ -409,6 +410,11 @@ namespace AppDev2
             myReader = cmd.ExecuteReader();
             myReader.Read();
             return Convert.ToInt32(myReader[myReader.GetName(0)]);
+        }
+
+        internal void setServiceID(int p)
+        {
+            addedServiceID = p;
         }
     }
 }

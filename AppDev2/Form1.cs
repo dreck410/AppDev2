@@ -50,6 +50,7 @@ namespace AppDev2
         private void GO_Click(object sender, EventArgs e)
         {
             //CHeck for empty/invalid- Curt
+            dataBaseConnector.Instance.setServiceID(-1);
             bool invalidEntry = false;
            
             DateTime serviceDateTime= DateTime.Now;
@@ -80,6 +81,7 @@ namespace AppDev2
                 catch (Exception)
                 {
                     MessageBox.Show("Please Select a Template Date from the List");
+                    UpdateFields("-1");
                     return;
                 }
                 templateDateTime = Convert.ToDateTime(tDT);
@@ -90,16 +92,18 @@ namespace AppDev2
             int serviceID = dataBaseConnector.Instance.getServiceID(serviceDateTime.ToString());
             string title = TitleBox.Text;
             string theme = ThemeBox.Text;
-
+            string SongLeader = SongLeaderBox.Text;
+            
+            
             //songLeader either ID or 
             // a drop down that has all of the past song leaders from the database
-            string SongLeader = SongLeaderBox.Text;
-            Console.WriteLine(SongLeader);
+
 
             //If all is good, create an update data method -Reckie
-            if (invalidEntry)
+            if (invalidEntry || isDirty(title) || isDirty(theme) || isDirty(SongLeader))
             {
                 MessageBox.Show("Invalid Entries Detected- Please Re-Enter");
+                UpdateFields("-1");
             }
             else
             {
@@ -112,6 +116,17 @@ namespace AppDev2
 
             }
 
+        }
+
+        private bool isDirty(string str)
+        {
+            int i = str.IndexOf(';');
+            if (0 <= str.IndexOf(';')) { return true; }
+            if (0 <= str.IndexOf('"')) { return true; }
+            if (0 <= str.IndexOf('\'')) { return true; }
+            //if (0 >= str.IndexOf())
+
+            return false;
         }
 
         private void UpdateFields(string servID)
