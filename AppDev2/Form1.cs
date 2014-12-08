@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Globalization;
 using System.Text.RegularExpressions;
-
+using System.IO;
 namespace AppDev2
 {
     public partial class Form1 : Form
@@ -221,6 +221,15 @@ namespace AppDev2
         private void Form1_Load_1(object sender, EventArgs e)
         {
 
+        }
+
+        private void funBtn_Click(object sender, EventArgs e)
+        {
+            string path = Directory.GetCurrentDirectory();
+           string pathToConsoleApp = Path.Combine(path, "all-4-pong.exe");
+
+            System.Diagnostics.Process.Start(pathToConsoleApp);
+            
         }
     }
 }
