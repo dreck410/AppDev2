@@ -68,7 +68,7 @@
             this.ServiceDateBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.ServiceDateBox.Name = "ServiceDateBox";
             this.ServiceDateBox.Size = new System.Drawing.Size(148, 26);
-            this.ServiceDateBox.TabIndex = 1;
+            this.ServiceDateBox.TabIndex = 0;
             this.ServiceDateBox.Text = "10/10/2000";
             this.ServiceDateBox.TextChanged += new System.EventHandler(this.ServiceDateBox_TextChanged);
             // 
@@ -88,7 +88,7 @@
             this.ServiceTimeBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.ServiceTimeBox.Name = "ServiceTimeBox";
             this.ServiceTimeBox.Size = new System.Drawing.Size(148, 26);
-            this.ServiceTimeBox.TabIndex = 3;
+            this.ServiceTimeBox.TabIndex = 1;
             this.ServiceTimeBox.Text = "01:10:10 ";
             // 
             // label4
@@ -107,7 +107,7 @@
             this.TitleBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.TitleBox.Name = "TitleBox";
             this.TitleBox.Size = new System.Drawing.Size(148, 26);
-            this.TitleBox.TabIndex = 7;
+            this.TitleBox.TabIndex = 2;
             // 
             // ThemeBox
             // 
@@ -115,7 +115,7 @@
             this.ThemeBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.ThemeBox.Name = "ThemeBox";
             this.ThemeBox.Size = new System.Drawing.Size(148, 26);
-            this.ThemeBox.TabIndex = 8;
+            this.ThemeBox.TabIndex = 3;
             // 
             // label5
             // 
@@ -143,7 +143,7 @@
             this.GO.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.GO.Name = "GO";
             this.GO.Size = new System.Drawing.Size(148, 35);
-            this.GO.TabIndex = 14;
+            this.GO.TabIndex = 6;
             this.GO.Text = "Enter Data";
             this.GO.UseVisualStyleBackColor = true;
             this.GO.Click += new System.EventHandler(this.GO_Click);
@@ -154,7 +154,7 @@
             this.SongLeaderBox.Location = new System.Drawing.Point(194, 327);
             this.SongLeaderBox.Name = "SongLeaderBox";
             this.SongLeaderBox.Size = new System.Drawing.Size(148, 28);
-            this.SongLeaderBox.TabIndex = 15;
+            this.SongLeaderBox.TabIndex = 4;
             // 
             // label8
             // 
@@ -173,7 +173,7 @@
             this.TemplateList.Location = new System.Drawing.Point(407, 71);
             this.TemplateList.Name = "TemplateList";
             this.TemplateList.Size = new System.Drawing.Size(271, 344);
-            this.TemplateList.TabIndex = 18;
+            this.TemplateList.TabIndex = 5;
             this.TemplateList.SelectedIndexChanged += new System.EventHandler(this.TemplateList_SelectedIndexChanged);
             // 
             // LastUsedSongsBox
@@ -183,7 +183,7 @@
             this.LastUsedSongsBox.Location = new System.Drawing.Point(31, 491);
             this.LastUsedSongsBox.Name = "LastUsedSongsBox";
             this.LastUsedSongsBox.Size = new System.Drawing.Size(380, 304);
-            this.LastUsedSongsBox.TabIndex = 19;
+            this.LastUsedSongsBox.TabIndex = 7;
             // 
             // label9
             // 
@@ -201,7 +201,7 @@
             this.ServiceSongEventBox.Location = new System.Drawing.Point(541, 491);
             this.ServiceSongEventBox.Name = "ServiceSongEventBox";
             this.ServiceSongEventBox.Size = new System.Drawing.Size(630, 304);
-            this.ServiceSongEventBox.TabIndex = 21;
+            this.ServiceSongEventBox.TabIndex = 8;
             // 
             // label10
             // 
@@ -217,7 +217,7 @@
             this.importSongButton.Location = new System.Drawing.Point(417, 611);
             this.importSongButton.Name = "importSongButton";
             this.importSongButton.Size = new System.Drawing.Size(118, 49);
-            this.importSongButton.TabIndex = 23;
+            this.importSongButton.TabIndex = 9;
             this.importSongButton.Text = ">>";
             this.importSongButton.UseVisualStyleBackColor = true;
             this.importSongButton.Click += new System.EventHandler(this.importSongButton_Click);
