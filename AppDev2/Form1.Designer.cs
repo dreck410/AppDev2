@@ -188,7 +188,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(127, 468);
+            this.label9.Location = new System.Drawing.Point(27, 468);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(55, 20);
             this.label9.TabIndex = 20;
@@ -200,13 +200,13 @@
             this.ServiceSongEventBox.ItemHeight = 20;
             this.ServiceSongEventBox.Location = new System.Drawing.Point(541, 491);
             this.ServiceSongEventBox.Name = "ServiceSongEventBox";
-            this.ServiceSongEventBox.Size = new System.Drawing.Size(420, 304);
+            this.ServiceSongEventBox.Size = new System.Drawing.Size(630, 304);
             this.ServiceSongEventBox.TabIndex = 21;
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(656, 468);
+            this.label10.Location = new System.Drawing.Point(537, 468);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(170, 20);
             this.label10.TabIndex = 22;
