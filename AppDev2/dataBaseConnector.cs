@@ -152,7 +152,7 @@ namespace AppDev2
 
 
         // inserts data into the table
-        //0 is good
+        //  0 is good
         // -1 songleader issue
         // -2 temp issue
         public int insert(string serviceTime, int templateID, string theme, string title, string songLeader)
@@ -248,11 +248,6 @@ namespace AppDev2
             return personID;
         }
         
-        /*THIS IS FOR +3 POINTS, LET USER CHOOSE SONGLEADERNAMES FROM DROP DOWN. HERE IS WORKING QUERY, JSUT NEED TO MAKE METHOD
-         * Select First_Name+' '+Last_Name as "name"
-         * FROM dbo.Person,dbo.Service
-         * WHERE dbo.Person.Person_ID = dbo.Service.Songleader_ID
-         * */
 
         internal IEnumerable<string> getValidDates()
         {

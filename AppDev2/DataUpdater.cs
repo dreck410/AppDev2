@@ -14,7 +14,7 @@ namespace AppDev2
     {
 
         //blah blah do the good stuff here
-        public static bool validateDateTime(string date, string time, string tempDate, string tempTime)
+        public static bool validateDateTime(string date, string time)//, string tempDate, string tempTime)
         {
              bool invalid=true;
              try
@@ -23,7 +23,7 @@ namespace AppDev2
                 // DateTime serviceDateTime = DateTime.ParseExact(date + " " + time, "MM/dd/yyyy hh:mm:ss ", CultureInfo.InvariantCulture);
                 // DateTime templateDateTime = DateTime.ParseExact(tempDate + " " + tempTime, "MM/dd/yyyy hh:mm:ss ", CultureInfo.InvariantCulture);
                  DateTime serviceDateTime = Convert.ToDateTime(date + " " + time);
-                 DateTime templateDateTime = Convert.ToDateTime(tempDate + " " + tempTime);
+                // DateTime templateDateTime = Convert.ToDateTime(tempDate + " " + tempTime);
                  invalid = false;
 
 

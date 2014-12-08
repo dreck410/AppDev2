@@ -61,18 +61,29 @@ namespace AppDev2
 
 
             //From boxes 3 and 4
-            string templateDate = TemplateDateBox.Text;
-            string templateTime = TemplateTimeBox.Text;
+          //  string templateDate = TemplateDateBox.Text;
+           // string templateTime = TemplateTimeBox.Text;
 
             //This method validates all dates/time input
-            invalidEntry = DataUpdater.validateDateTime(serviceDate, serviceTime, templateDate, templateTime);
+            invalidEntry = DataUpdater.validateDateTime(serviceDate, serviceTime);//, templateDate, templateTime);
 
 
-            if (invalidEntry || serviceDate == "" || serviceTime == "" || templateDate == "" || templateTime == "") { invalidEntry = true; }
+            if (invalidEntry || serviceDate == "" || serviceTime == "" ) { invalidEntry = true; }
             else //Aka previous method validated entries
             {
                 serviceDateTime = Convert.ToDateTime(serviceDate + " " + serviceTime);
-                templateDateTime = Convert.ToDateTime(templateDate + " " + templateTime);
+                string tDT = "";
+                try
+                {
+                    tDT = TemplateList.SelectedItem.ToString();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Please Select a Template Date from the List");
+                    return;
+                }
+                templateDateTime = Convert.ToDateTime(tDT);
+                //templateDateTime = Convert.ToDateTime(templateDate + " " + templateTime);
                 //MessageBox.Show(serviceDateTime.ToString());//It looks correct-leaving this uncommented, what do you think?
             
             }
@@ -145,8 +156,18 @@ namespace AppDev2
 
         private void importSongButton_Click(object sender, EventArgs e)
         {
-            string selectedSong = LastUsedSongsBox.SelectedItem.ToString();
-            string selectedEvent = ServiceSongEventBox.SelectedItem.ToString();
+            string selectedSong = "";
+            string selectedEvent = "";
+            try
+            {
+                selectedSong = LastUsedSongsBox.SelectedItem.ToString();
+                selectedEvent = ServiceSongEventBox.SelectedItem.ToString();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Please Select a Song and an Event.");
+                return;
+            }
             string serviceID = dataBaseConnector.Instance.importSongToEvent(selectedSong, selectedEvent);
             UpdateFields(serviceID);
             Console.WriteLine("Button PRess");
