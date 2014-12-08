@@ -55,7 +55,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(46, 43);
+            this.label1.Location = new System.Drawing.Point(65, 43);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(100, 20);
@@ -75,7 +75,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(51, 106);
+            this.label2.Location = new System.Drawing.Point(66, 102);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(99, 20);
@@ -94,7 +94,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(51, 163);
+            this.label3.Location = new System.Drawing.Point(65, 152);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(114, 20);
@@ -113,7 +113,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(56, 275);
+            this.label4.Location = new System.Drawing.Point(66, 275);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(38, 20);
@@ -139,7 +139,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(51, 352);
+            this.label5.Location = new System.Drawing.Point(66, 352);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(58, 20);
@@ -149,7 +149,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(46, 425);
+            this.label6.Location = new System.Drawing.Point(65, 425);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(91, 20);
@@ -159,7 +159,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(46, 218);
+            this.label7.Location = new System.Drawing.Point(66, 208);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(113, 20);
@@ -197,7 +197,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(410, 105);
+            this.label8.Location = new System.Drawing.Point(401, 152);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(161, 20);
             this.label8.TabIndex = 17;
@@ -208,7 +208,7 @@
             // 
             this.TemplateList.FormattingEnabled = true;
             this.TemplateList.ItemHeight = 20;
-            this.TemplateList.Location = new System.Drawing.Point(414, 137);
+            this.TemplateList.Location = new System.Drawing.Point(405, 188);
             this.TemplateList.Name = "TemplateList";
             this.TemplateList.Size = new System.Drawing.Size(271, 164);
             this.TemplateList.TabIndex = 18;
@@ -218,7 +218,7 @@
             // 
             this.LastUsedSongsBox.FormattingEnabled = true;
             this.LastUsedSongsBox.ItemHeight = 20;
-            this.LastUsedSongsBox.Location = new System.Drawing.Point(766, 137);
+            this.LastUsedSongsBox.Location = new System.Drawing.Point(38, 587);
             this.LastUsedSongsBox.Name = "LastUsedSongsBox";
             this.LastUsedSongsBox.Size = new System.Drawing.Size(380, 304);
             this.LastUsedSongsBox.TabIndex = 19;
@@ -226,7 +226,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(762, 102);
+            this.label9.Location = new System.Drawing.Point(34, 548);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(98, 20);
             this.label9.TabIndex = 20;
@@ -236,7 +236,7 @@
             // 
             this.ServiceSongEventBox.FormattingEnabled = true;
             this.ServiceSongEventBox.ItemHeight = 20;
-            this.ServiceSongEventBox.Location = new System.Drawing.Point(1287, 137);
+            this.ServiceSongEventBox.Location = new System.Drawing.Point(583, 587);
             this.ServiceSongEventBox.Name = "ServiceSongEventBox";
             this.ServiceSongEventBox.Size = new System.Drawing.Size(420, 304);
             this.ServiceSongEventBox.TabIndex = 21;
@@ -244,7 +244,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(1283, 102);
+            this.label10.Location = new System.Drawing.Point(579, 548);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(170, 20);
             this.label10.TabIndex = 22;
@@ -252,7 +252,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(1152, 250);
+            this.button1.Location = new System.Drawing.Point(444, 720);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(118, 51);
             this.button1.TabIndex = 23;
@@ -264,7 +264,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1739, 532);
+            this.ClientSize = new System.Drawing.Size(1104, 1008);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.ServiceSongEventBox);
