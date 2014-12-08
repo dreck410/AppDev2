@@ -35,6 +35,7 @@ namespace AppDev2
         {
             //myConnection = new SqlConnection("Server=sparky.bju.edu; Database=cps301_dreck410; Trusted_Connection=True;");
             myConnection = new SqlConnection("Server=sparky.bju.edu;Database=cps301_dreck410;User Id=dreck410;Password=dreck410;");
+           //myConnection = new SqlConnection("Server=sparky.bju.edu;Database =
             try
             {
                 myConnection.Open();
