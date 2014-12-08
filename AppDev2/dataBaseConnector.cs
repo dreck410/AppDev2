@@ -155,6 +155,7 @@ namespace AppDev2
         //  0 is good
         // -1 songleader issue
         // -2 temp issue
+        // -3 time issue
         public int insert(string serviceTime, int templateID, string theme, string title, string songLeader)
         {
 
@@ -177,11 +178,19 @@ namespace AppDev2
             {
                 personString = "null";
             }
-            
-            string insertService = "insert into Service values ( \'" + serviceTime + "\', \'" + theme + "\', \'" + title + "\', null, \'N\', \'N\', \'N\', null, " + personString + ", null)";
-
+            string insertService = "";
+            if (newTime(serviceTime))
+            {
+                insertService = "insert into Service values ( \'" + serviceTime + "\', \'" + theme + "\', \'" + title + "\', null, \'N\', \'N\', \'N\', null, " + personString + ", null)";
+            }
+            else
+            {
+                // not a new time. 
+                return -3;
+            }
+            this.connect();
             SqlCommand cmd = new SqlCommand(insertService, myConnection);
-            Console.WriteLine("Rows affected " + cmd.ExecuteNonQuery().ToString());
+            cmd.ExecuteNonQuery();
 
             // needs to get the ID of the new service after the new service has been created!
             int newServiceID = getServiceID(serviceTime);
@@ -212,6 +221,28 @@ namespace AppDev2
             }
             addedServiceID = newServiceID;
             return 0;
+        }
+
+        private bool newTime(string serviceTime)
+        {
+            bool output = false;
+            string selectService = "select * from Service where Svc_DateTime = '" + serviceTime + "'";
+            this.connect();
+            SqlCommand cmd = new SqlCommand(selectService, myConnection);
+            SqlDataReader myReader = null;
+            myReader = cmd.ExecuteReader();
+            myReader.Read();
+            try
+            {
+                Convert.ToInt32(myReader["Service_ID"]);
+                output = false;
+            }
+            catch (Exception)
+            {
+                output = true;
+            }
+            
+            return output;
         }
 
         private int getPersonID(string songLeader)

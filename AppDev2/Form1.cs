@@ -149,7 +149,7 @@ namespace AppDev2
             errors.Add("Service Added");
             errors.Add("Invalid Song Leader");
             errors.Add("Invalid Template Service Time");
-            
+            errors.Add("Service Date and Time already Used");
             MessageBox.Show(errors[(result * -1)]);
           
         }
