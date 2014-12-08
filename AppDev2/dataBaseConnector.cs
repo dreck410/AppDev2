@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Data;
+using System.Windows.Forms;
+using System.Globalization;
+using System.Text.RegularExpressions;
 namespace AppDev2
 {
 
@@ -31,20 +34,34 @@ namespace AppDev2
             }
         }
 
-        public void connect()
+        public bool connect(string database,string user,string pass, int btn)
         {
+
             //myConnection = new SqlConnection("Server=sparky.bju.edu; Database=cps301_dreck410; Trusted_Connection=True;");
-            myConnection = new SqlConnection("Server=sparky.bju.edu;Database=cps301_dreck410;User Id=dreck410;Password=dreck410;");
+            if (btn == 1)
+            {
+                myConnection = new SqlConnection("Server=sparky.bju.edu;Database=" + database + ";User Id=" + user + ";Password=" + pass + ";");
+            }
+            if (btn == 2)
+            {
+                myConnection = new SqlConnection("Server=sparky.bju.edu;Database=cps301_ckost598;User Id=ckost598;Password=ckost598;");
+            }
+            
+            if (btn == 3)
+            {
+                myConnection = new SqlConnection("Server=sparky.bju.edu;Database=cps301_dreck410;User Id=dreck410;Password=dreck410;");
+            }
             try
             {
                 myConnection.Open();
                 Console.WriteLine("Connected to database");
-
+                return true;
             }
             catch (Exception e)
             {
-                Console.WriteLine("Did Not Connect");
+                MessageBox.Show("Did Not Connect");
                 Console.WriteLine(e.ToString());
+                return false;
             }
         }
 
@@ -52,7 +69,7 @@ namespace AppDev2
         {
             List<string> leaders = new List<string>();
             string sql = "select distinct (Person.First_Name + ' ' + Person.Last_Name) as Name from service, Person where Service.Songleader_ID = Person.Person_ID";
-            this.connect();
+            this.connect(ConnetionInfo.database,ConnetionInfo.username,ConnetionInfo.pass,ConnetionInfo.option);
             SqlCommand cmd = new SqlCommand(sql, myConnection);
             SqlDataReader myReader = null;
             myReader = cmd.ExecuteReader();
@@ -82,8 +99,8 @@ namespace AppDev2
                 GROUP BY 
                 Song.Song_ID, Song.Title, Song.Arranger, Song.Hymnbook_Num, Song.Song_Type
                 ";
-                    
-                this.connect();
+
+                this.connect(ConnetionInfo.database, ConnetionInfo.username, ConnetionInfo.pass, ConnetionInfo.option);
                 SqlCommand cmd = new SqlCommand(sql, myConnection);
                 SqlDataReader myReader = null;
                 myReader = cmd.ExecuteReader();
@@ -100,9 +117,9 @@ namespace AppDev2
                 Song.Song_Type <> 'C'
                 GROUP BY 
                 Song.Song_ID, Song.Title, Song.Arranger, Song.Hymnbook_Num, Song.Song_Type
-                "; 
-                
-                this.connect();
+                ";
+
+                this.connect(ConnetionInfo.database, ConnetionInfo.username, ConnetionInfo.pass, ConnetionInfo.option);
                 SqlCommand cmd = new SqlCommand(sql, myConnection);
                 SqlDataReader myReader = null;
                 myReader = cmd.ExecuteReader();
@@ -115,7 +132,7 @@ namespace AppDev2
                 SongUsageView.Title
                 FROM SongUsageView
                 ORDER BY LastUsedDate ASC, Title ";
-                this.connect();
+                this.connect(ConnetionInfo.database, ConnetionInfo.username, ConnetionInfo.pass, ConnetionInfo.option);
                 SqlCommand cmd = new SqlCommand(storeProc, myConnection);
                 SqlDataReader myReader = null;
                 myReader = cmd.ExecuteReader();
@@ -130,7 +147,7 @@ namespace AppDev2
         public int getServiceID(string templateService){
             int serviceID = -1;
 
-            this.connect();
+            this.connect(ConnetionInfo.database, ConnetionInfo.username, ConnetionInfo.pass, ConnetionInfo.option);
             string sql = "SELECT Service.Service_ID FROM Service WHERE Service.Svc_DateTime = \'" + templateService + "\'";
             SqlCommand cmd = new SqlCommand(sql, myConnection);
             SqlDataReader myReader = null;
@@ -170,7 +187,7 @@ namespace AppDev2
             List<int> EventType_ID = new List<int>();
             List<string> Notes = new List<string>();
 
-            this.connect();
+            this.connect(ConnetionInfo.database, ConnetionInfo.username, ConnetionInfo.pass, ConnetionInfo.option);
             string personString = personID.ToString();
 
             
@@ -193,7 +210,7 @@ namespace AppDev2
                  *  */
                 return -3;
             }
-            this.connect();
+            this.connect(ConnetionInfo.database, ConnetionInfo.username, ConnetionInfo.pass, ConnetionInfo.option);
             SqlCommand cmd = new SqlCommand(insertService, myConnection);
             cmd.ExecuteNonQuery();
 
@@ -204,7 +221,7 @@ namespace AppDev2
 
             string serviceEvents = "select Seq_Num, EventType_ID, Notes from ServiceEvent where ServiceEvent.Service_ID = " + templateID.ToString();
 
-            this.connect();
+            this.connect(ConnetionInfo.database, ConnetionInfo.username, ConnetionInfo.pass, ConnetionInfo.option);
             cmd = new SqlCommand(serviceEvents, myConnection);
             SqlDataReader myReader = null;
             myReader = cmd.ExecuteReader();
@@ -220,7 +237,7 @@ namespace AppDev2
             {
                 string insertServiceEvent = "insert into ServiceEvent values ( " + newServiceID.ToString() + ", " + Seq_Num[i].ToString() + ", " + EventType_ID[i] + " , '" + Notes[i] + "', 'N', null, null, null)";
 
-                this.connect();
+                this.connect(ConnetionInfo.database, ConnetionInfo.username, ConnetionInfo.pass, ConnetionInfo.option);
                 cmd = new SqlCommand(insertServiceEvent, myConnection);
                 cmd.ExecuteNonQuery();
             }
@@ -232,7 +249,7 @@ namespace AppDev2
         {
             bool output = false;
             string selectService = "select * from Service where Svc_DateTime = '" + serviceTime + "'";
-            this.connect();
+            this.connect(ConnetionInfo.database, ConnetionInfo.username, ConnetionInfo.pass, ConnetionInfo.option);
             SqlCommand cmd = new SqlCommand(selectService, myConnection);
             SqlDataReader myReader = null;
             myReader = cmd.ExecuteReader();
@@ -262,11 +279,11 @@ namespace AppDev2
             catch (Exception e)
             {
                 string[] fullName = songLeader.Split(' ');
-                this.connect();
+                this.connect(ConnetionInfo.database, ConnetionInfo.username, ConnetionInfo.pass, ConnetionInfo.option);
                 sql = "select Person.Person_ID from Person where\'" + fullName[0] + "\' = Person.First_Name and \'" + fullName[1] + "\' = Person.Last_Name";
 
             }
-            this.connect();
+            this.connect(ConnetionInfo.database, ConnetionInfo.username, ConnetionInfo.pass, ConnetionInfo.option);
             SqlCommand cmd = new SqlCommand(sql, myConnection);
             SqlDataReader myReader = null;
             myReader = cmd.ExecuteReader();
@@ -289,7 +306,7 @@ namespace AppDev2
         {
             List<string> Dates = new List<string>();
             string sql = "select distinct Svc_DateTime from service";
-            this.connect();
+            this.connect(ConnetionInfo.database, ConnetionInfo.username, ConnetionInfo.pass, ConnetionInfo.option);
             SqlCommand cmd = new SqlCommand(sql, myConnection);
             SqlDataReader myReader = null;
             myReader = cmd.ExecuteReader();
@@ -316,7 +333,7 @@ namespace AppDev2
                                         ServiceEvent.Service_ID = " + addedServiceID.ToString() + @" 
                                         and (ServiceEvent.EventType_ID = 5 or ServiceEvent.EventType_ID = 11)
                                         and (ServiceEvent.Song_ID = Song.Song_ID or ServiceEvent.Song_ID is null)";
-            this.connect();
+            this.connect(ConnetionInfo.database, ConnetionInfo.username, ConnetionInfo.pass, ConnetionInfo.option);
             SqlCommand cmd = new SqlCommand(getCongSongsSQL, myConnection);
             SqlDataReader myReader = null;
             myReader = cmd.ExecuteReader();
@@ -334,7 +351,7 @@ namespace AppDev2
             string getCongSongsSQL = @"select *
                                         from SongUsageView
                                         order by LastUsedDate, Title";
-            this.connect();
+            this.connect(ConnetionInfo.database, ConnetionInfo.username, ConnetionInfo.pass, ConnetionInfo.option);
             SqlCommand cmd = new SqlCommand(getCongSongsSQL, myConnection);
             SqlDataReader myReader = null;
             myReader = cmd.ExecuteReader();
@@ -362,7 +379,7 @@ namespace AppDev2
             string updateEvent = @"UPDATE ServiceEvent
                                     SET Song_ID= " + songID.ToString() + @" 
                                     where Event_ID = " + eventID.ToString();
-            this.connect();
+            this.connect(ConnetionInfo.database, ConnetionInfo.username, ConnetionInfo.pass, ConnetionInfo.option);
             SqlCommand cmd = new SqlCommand(updateEvent, myConnection);
             cmd.ExecuteNonQuery();
 
@@ -374,7 +391,7 @@ namespace AppDev2
             Seq_Num = Seq_Num.Trim();
             Descr = Descr.Trim();
             string EventID = @"select * from ServiceEvent where Seq_Num = " + Seq_Num.ToString() + " and Service_ID = " + addedServiceID.ToString();
-            this.connect();
+            this.connect(ConnetionInfo.database, ConnetionInfo.username, ConnetionInfo.pass, ConnetionInfo.option);
             SqlCommand cmd = new SqlCommand(EventID, myConnection);
             SqlDataReader myReader = null;
             myReader = cmd.ExecuteReader();
@@ -386,7 +403,7 @@ namespace AppDev2
         {
             Title = Title.Trim();
             string songID = @"select Song_ID from Song where Title = '" + Title + "'";
-            this.connect();
+            this.connect(ConnetionInfo.database, ConnetionInfo.username, ConnetionInfo.pass, ConnetionInfo.option);
             SqlCommand cmd = new SqlCommand(songID, myConnection);
             SqlDataReader myReader = null;
             myReader = cmd.ExecuteReader();
