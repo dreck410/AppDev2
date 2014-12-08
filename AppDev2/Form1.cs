@@ -225,10 +225,17 @@ namespace AppDev2
 
         private void funBtn_Click(object sender, EventArgs e)
         {
-            string path = Directory.GetCurrentDirectory();
-           string pathToConsoleApp = Path.Combine(path, "all-4-pong.exe");
+            try
+            {
+                string path = Directory.GetCurrentDirectory();
+                string pathToConsoleApp = Path.Combine(path, "all-4-pong.exe");
 
-            System.Diagnostics.Process.Start(pathToConsoleApp);
+                System.Diagnostics.Process.Start(pathToConsoleApp);
+            }
+            catch
+            {
+                Console.WriteLine("Oops");
+            }
             
         }
     }
