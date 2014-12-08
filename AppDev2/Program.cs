@@ -18,7 +18,7 @@ namespace AppDev2
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            dataBaseConnector.Instance.connect();
+            
 
             Application.Run(new LoginForm());
             Application.Run(new Form1());
