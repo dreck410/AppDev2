@@ -143,6 +143,15 @@ namespace AppDev2
           
         }
 
+        private void importSongButton_Click(object sender, EventArgs e)
+        {
+            string selectedSong = LastUsedSongsBox.SelectedItem.ToString();
+            string selectedEvent = ServiceSongEventBox.SelectedItem.ToString();
+            string serviceID = dataBaseConnector.Instance.importSongToEvent(selectedSong, selectedEvent);
+            UpdateFields(serviceID);
+            Console.WriteLine("Button PRess");
+        }
+
         private void ServiceDateBox_TextChanged(object sender, EventArgs e)
         {
 
@@ -173,7 +182,8 @@ namespace AppDev2
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+
+        private void Form1_Load_1(object sender, EventArgs e)
         {
 
         }

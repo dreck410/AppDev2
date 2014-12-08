@@ -157,6 +157,8 @@ namespace AppDev2
         // -2 temp issue
         public int insert(string serviceTime, int templateID, string theme, string title, string songLeader)
         {
+
+            addedServiceID = -1;
             int personID = 0;
             if (songLeader != "")
             {
@@ -289,7 +291,7 @@ namespace AppDev2
             myReader = cmd.ExecuteReader();
             while (myReader.Read())
             {
-                string line = myReader["Seq_Num"].ToString() + " | " + myReader["Description"].ToString() + " | " + myReader["Title"].ToString();
+                string line = myReader["Seq_Num"].ToString() + "  |  " + myReader["Description"].ToString() + "  |  " + myReader["Title"].ToString();
                 congSongs.Add(line);
             }
             return congSongs;
@@ -299,17 +301,66 @@ namespace AppDev2
         {
             List<string> congSongs = new List<string>();
             string getCongSongsSQL = @"select *
-                                       from SongUsageView";
+                                        from SongUsageView
+                                        order by LastUsedDate, Title";
             this.connect();
             SqlCommand cmd = new SqlCommand(getCongSongsSQL, myConnection);
             SqlDataReader myReader = null;
             myReader = cmd.ExecuteReader();
             while (myReader.Read())
             {
-                string line = myReader["LastUsedDate"].ToString() + " | " + myReader["Title"].ToString() + " | " + myReader["HymnBook_Num"].ToString();
+                string line = myReader["Title"].ToString() + "  |  " + myReader["HymnBook_Num"].ToString();
                 congSongs.Add(line);
             }
             return congSongs;
+        }
+
+        internal string importSongToEvent(string selectedSong, string selectedEvent)
+        {
+            //0 = Title
+            //1 = Hymn Num
+            string[] parsedSong = selectedSong.Split('|');
+            //0 = Seq_Num
+            //1 = Description
+            //2 = Title
+            string[] parsedEvent = selectedEvent.Split('|');
+
+            int songID = getSongID(parsedSong[0]);
+            int eventID = getEventID(parsedEvent[0], parsedEvent[1]);
+
+            string updateEvent = @"UPDATE ServiceEvent
+                                    SET Song_ID= " + songID.ToString() + @" 
+                                    where Event_ID = " + eventID.ToString();
+            this.connect();
+            SqlCommand cmd = new SqlCommand(updateEvent, myConnection);
+            cmd.ExecuteNonQuery();
+
+            return addedServiceID.ToString();
+        }
+
+        private int getEventID(string Seq_Num, string Descr)
+        {
+            Seq_Num = Seq_Num.Trim();
+            Descr = Descr.Trim();
+            string EventID = @"select * from ServiceEvent where Seq_Num = " + Seq_Num.ToString() + " and Service_ID = " + addedServiceID.ToString();
+            this.connect();
+            SqlCommand cmd = new SqlCommand(EventID, myConnection);
+            SqlDataReader myReader = null;
+            myReader = cmd.ExecuteReader();
+            myReader.Read();
+            return Convert.ToInt32(myReader["Event_ID"]);
+        }
+
+        private int getSongID(string Title)
+        {
+            Title = Title.Trim();
+            string songID = @"select Song_ID from Song where Title = '" + Title + "'";
+            this.connect();
+            SqlCommand cmd = new SqlCommand(songID, myConnection);
+            SqlDataReader myReader = null;
+            myReader = cmd.ExecuteReader();
+            myReader.Read();
+            return Convert.ToInt32(myReader[myReader.GetName(0)]);
         }
     }
 }

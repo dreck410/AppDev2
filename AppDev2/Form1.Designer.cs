@@ -49,7 +49,8 @@
             this.label9 = new System.Windows.Forms.Label();
             this.ServiceSongEventBox = new System.Windows.Forms.ListBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.importSongButton = new System.Windows.Forms.Button();
+            this.label11 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -250,22 +251,32 @@
             this.label10.TabIndex = 22;
             this.label10.Text = "Congregational Events";
             // 
-            // button1
+            // importSongButton
             // 
-            this.button1.Location = new System.Drawing.Point(444, 720);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(118, 51);
-            this.button1.TabIndex = 23;
-            this.button1.Text = ">>";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.importSongButton.Location = new System.Drawing.Point(444, 687);
+            this.importSongButton.Name = "importSongButton";
+            this.importSongButton.Size = new System.Drawing.Size(118, 51);
+            this.importSongButton.TabIndex = 23;
+            this.importSongButton.Text = ">>";
+            this.importSongButton.UseVisualStyleBackColor = true;
+            this.importSongButton.Click += new System.EventHandler(this.importSongButton_Click);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(453, 741);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(97, 20);
+            this.label11.TabIndex = 24;
+            this.label11.Text = "Import Song";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1104, 1008);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.importSongButton);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.ServiceSongEventBox);
             this.Controls.Add(this.label9);
@@ -289,6 +300,7 @@
             this.Controls.Add(this.label1);
             this.Name = "Form1";
             this.Text = "AppDev2";
+            this.Load += new System.EventHandler(this.Form1_Load_1);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -317,7 +329,8 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ListBox ServiceSongEventBox;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button importSongButton;
+        private System.Windows.Forms.Label label11;
     }
 }
 
