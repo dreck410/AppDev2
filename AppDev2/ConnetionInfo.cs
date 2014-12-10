@@ -12,7 +12,7 @@ namespace AppDev2
         public static string username;
         public static string pass;
         public static int option;
-        public static bool success=true;
+        public static bool success=false;
 
 
     }
